@@ -41,12 +41,12 @@ Python package wrapping ENCODE epigenomic data for a number of reference cell li
     :target: https://coveralls.io/github/LucaCappelletti94/epigenomic_dataset?branch=master
     :alt: Coveralls Coverage
 
-.. |pip| image:: https://badge.fury.io/py/epigenomic_dataset.svg
-    :target: https://badge.fury.io/py/epigenomic_dataset
+.. |pip| image:: https://badge.fury.io/py/epigenomic-dataset.svg
+    :target: https://badge.fury.io/py/epigenomic-dataset
     :alt: Pypi project
 
-.. |downloads| image:: https://pepy.tech/badge/epigenomic_dataset
-    :target: https://pepy.tech/badge/epigenomic_dataset
+.. |downloads| image:: https://pepy.tech/badge/epigenomic-dataset
+    :target: https://pepy.tech/badge/epigenomic-dataset
     :alt: Pypi total project downloads 
 
 .. |codacy|  image:: https://api.codacy.com/project/badge/Grade/85bc1e3d96bf4c43a2ca70ca233a1bca
