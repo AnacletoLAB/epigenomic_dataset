@@ -18,7 +18,10 @@ Since some software handling coverages sometime get slightly different results, 
 
 |coveralls| |sonar_coverage| |code_climate_coverage|
 
-Python package wrapping ENCODE epigenomic data for a number of reference cell lines.
+Pipeline
+----------------------------------------------
+The considered raw data are from `this query from the ENCODE project <https://www.encodeproject.org/search/?searchTerm=fold+change+over+control&type=Experiment&assembly=hg19&status=released&biosample_ontology.classification=cell+line&files.file_type=bigWig&replication_type=isogenic&audit.ERROR.category%21=extremely+low+read+depth&audit.ERROR.category%21=inconsistent+genetic+modification+reagent+source+and+identifier&audit.ERROR.category%21=missing+control+alignments&audit.ERROR.category%21=extremely+low+read+length&audit.NOT_COMPLIANT.category%21=insufficient+read+depth&audit.NOT_COMPLIANT.category%21=missing+controlled_by&audit.NOT_COMPLIANT.category%21=insufficient+read+length&audit.NOT_COMPLIANT.category%21=insufficient+replicate+concordance&audit.NOT_COMPLIANT.category%21=severe+bottlenecking&audit.NOT_COMPLIANT.category%21=control+insufficient+read+depth&audit.NOT_COMPLIANT.category%21=poor+library+complexity&limit=all>`_
+
 
 
 .. |travis| image:: https://travis-ci.org/LucaCappelletti94/epigenomic_dataset.png
