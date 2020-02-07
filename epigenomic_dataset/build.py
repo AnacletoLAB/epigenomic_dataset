@@ -1,12 +1,18 @@
 import pandas as pd
 import os
-from typing import List, Union
+from typing import List
 from encodeproject import download
 from pybwtool import extract
 from tqdm.auto import tqdm
 
 
-def build(bed_path: str, cell_lines: List[str], nan_threshold: float = 0.9, path: str = "epigenomes"):
+def build(
+    bed_path: str,
+    cell_lines: List[str],
+    nan_threshold: float = 0.9,
+    path: str = "epigenomes",
+    clear_download: bool = False
+):
     """Download bigwigs from ENCODE and extract regions specified in given bed file.
 
     Parameters
@@ -19,6 +25,9 @@ def build(bed_path: str, cell_lines: List[str], nan_threshold: float = 0.9, path
         Percentage of NaNs to allow in every region.
     path:str="epigenomes",
         Path where to store the epigenomic data
+    clear_download: bool = False,
+        Whetever to delete the downloaded files or not.
+        By default False.
     """
     # Loading the epigenomes metadata
     epigenomes = pd.read_csv(
@@ -40,7 +49,7 @@ def build(bed_path: str, cell_lines: List[str], nan_threshold: float = 0.9, path
             path=path,
             **row.to_dict()
         )
-        # If the file was already parsed 
+        # If the file was already parsed
         if os.path.exists(target_path):
             continue
         # Download file
@@ -54,4 +63,5 @@ def build(bed_path: str, cell_lines: List[str], nan_threshold: float = 0.9, path
         # Save the obtained features
         pd.concat([bed, scores], axis=1).to_csv(target_path, sep="\t")
         # Remove the bigwig file
-        os.remove(epigenome_path)
+        if clear_download:
+            os.remove(epigenome_path)

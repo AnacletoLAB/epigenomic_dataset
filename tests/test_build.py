@@ -3,11 +3,14 @@ from epigenomic_dataset import build
 import shutil
 import pandas as pd
 
-def run_me_twice(tmp):
+
+def run_me_twice(tmp, clear_download):
     build(
-        bed_path="{}/test.bed".format(os.path.dirname(os.path.abspath(__file__))),
+        bed_path="{}/test.bed".format(
+            os.path.dirname(os.path.abspath(__file__))),
         cell_lines=["GM12892"],
-        path=tmp
+        path=tmp,
+        clear_download=clear_download
     )
     files = [
         candidate
@@ -23,10 +26,9 @@ def run_me_twice(tmp):
             ), sep="\t")
         )
 
-    
 
 def test_build():
     tmp = "{}/epigenomes".format(os.path.dirname(os.path.abspath(__file__)))
-    run_me_twice(tmp)
-    run_me_twice(tmp)
+    run_me_twice(tmp, False)
+    run_me_twice(tmp, True)
     shutil.rmtree(tmp)
