@@ -22,6 +22,18 @@ before_script:
 after_script:
 - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
 script:
+- git clone https://github.com/CRG-Barcelona/libbeato.git
+- git clone https://github.com/CRG-Barcelona/bwtool.git
+- cd libbeato/
+- git checkout 0c30432
+- ./configure --prefix=$HOME CFLAGS="-g -O0 -I${HOME}/include" LDFLAGS=-L${HOME}/lib > /dev/null
+- make > /dev/null
+- make install > /dev/null
+- cd ../bwtool/
+- ./configure --prefix=$HOME CFLAGS="-g -O0 -I${HOME}/include" LDFLAGS=-L${HOME}/lib > /dev/null
+- make > /dev/null
+- make install > /dev/null
+- cd ..
 - rm -rf .coverage
 - coverage erase
 - pytest --cov=epigenomic_dataset --cov-report xml:coverage.xml
