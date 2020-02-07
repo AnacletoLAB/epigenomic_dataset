@@ -44,7 +44,7 @@ with Notipy():
         "chrom",
         "chromStart",
         "chromEnd"
-    ]].to_csv("regions.bed", sep="\t")
+    ]].to_csv("regions.bed", sep="\t", header=False, index=False)
 
     build(
         bed_path=path_to_bed,
