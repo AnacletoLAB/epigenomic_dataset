@@ -1,0 +1,12 @@
+MANIFEST.in
+README.rst
+setup.py
+epigenomic_dataset/__init__.py
+epigenomic_dataset/__version__.py
+epigenomic_dataset/build.py
+epigenomic_dataset/epigenomes.csv
+epigenomic_dataset.egg-info/PKG-INFO
+epigenomic_dataset.egg-info/SOURCES.txt
+epigenomic_dataset.egg-info/dependency_links.txt
+epigenomic_dataset.egg-info/requires.txt
+epigenomic_dataset.egg-info/top_level.txt
