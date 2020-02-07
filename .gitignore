@@ -15,3 +15,5 @@ __pycache__
 .coverage*
 
 coverage.xml
+.pytest_cache
+.ipynb_checkpoints
