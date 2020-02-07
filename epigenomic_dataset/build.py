@@ -50,18 +50,17 @@ def build(
             **row.to_dict()
         )
         # If the file was already parsed
-        if os.path.exists(target_path):
-            continue
-        # Download file
-        download(row.url, epigenome_path)
-        # Extract the features
-        bed, scores = extract(
-            bed_path=bed_path,
-            bigwig_path=epigenome_path,
-            nan_threshold=nan_threshold
-        )
-        # Save the obtained features
-        pd.concat([bed, scores], axis=1).to_csv(target_path, sep="\t")
+        if not os.path.exists(target_path):
+            # Download file
+            download(row.url, epigenome_path)
+            # Extract the features
+            bed, scores = extract(
+                bed_path=bed_path,
+                bigwig_path=epigenome_path,
+                nan_threshold=nan_threshold
+            )
+            # Save the obtained features
+            pd.concat([bed, scores], axis=1).to_csv(target_path, sep="\t")
         # Remove the bigwig file
         if clear_download:
             os.remove(epigenome_path)
