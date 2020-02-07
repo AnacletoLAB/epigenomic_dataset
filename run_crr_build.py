@@ -4,7 +4,7 @@ from notipy_me import Notipy
 
 
 with Notipy():
-    cell_lines = [
+    cell_lines_encode = [
         "A549",
         "GM12878",
         "H1",
@@ -13,11 +13,20 @@ with Notipy():
         "K562",
         "MCF-7"
     ]
+    cell_lines_fantom = [
+        "A549",
+        "GM12878",
+        "H1",
+        "HEK293",
+        "HepG2",
+        "K562",
+        "MCF7"
+    ]
     windows_size = 1000
     path_to_bed = "regions.bed"
 
     enhancers, promoters = fantom(
-        cell_lines=cell_lines, # list of cell lines to be considered.
+        cell_lines=cell_lines_fantom, # list of cell lines to be considered.
         window_size=windows_size, # window size to use for the various regions.
         genome = "hg19", # considered genome version. Currently supported only "hg19".
         center_enhancers = "peak", # how to center the enhancer window, either around "peak" or the "center" of the region.
@@ -39,5 +48,5 @@ with Notipy():
 
     build(
         bed_path=path_to_bed,
-        cell_lines=cell_lines
+        cell_lines=cell_lines_encode
     )
