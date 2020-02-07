@@ -61,7 +61,9 @@ setup(
     # Add here the package dependencies
     install_requires=[
         "encodeproject",
-        "pybwtool"
+        "pybwtool",
+        "crr_labels",
+        "notipy_me"
     ],
     extras_require=extras,
 )
