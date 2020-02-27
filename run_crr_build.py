@@ -44,7 +44,13 @@ with Notipy():
         "chrom",
         "chromStart",
         "chromEnd"
-    ]].to_csv("regions.bed", sep="\t", header=False, index=False)
+    ]].to_csv("enhancers_regions.bed", sep="\t", header=False, index=False)
+
+    promoters[[
+        "chrom",
+        "chromStart",
+        "chromEnd"
+    ]].to_csv("promoters_regions.bed", sep="\t", header=False, index=False)
 
     build(
         bed_path=path_to_bed,
