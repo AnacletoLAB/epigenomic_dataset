@@ -7,8 +7,9 @@ from tqdm.auto import tqdm
 from multiprocessing import Pool, cpu_count
 import warnings
 
+
 def job(
-    bed_path:str,
+    bed_path: str,
     epigenome_path: str,
     target_path: str,
     url: str,
@@ -40,7 +41,8 @@ def build_tasks(
     bed_path: str,
     cell_lines: List[str],
     nan_threshold: float,
-    path: str,
+    epigenomes_path: str,
+    target_path: str,
     clear_download: bool
 ) -> List:
     """Download bigwigs from ENCODE and extract regions specified in given bed file.
@@ -53,8 +55,10 @@ def build_tasks(
         List of cell lines whose epigenomes are to retrieve.
     nan_threshold: float = 0.9,
         Percentage of NaNs to allow in every region.
-    path:str,
-        Path where to store the epigenomic data
+    epigenomes_path:str,
+        Path where to store the epigenomic bigWig.
+    target_path:str,
+        Path where to store the epigenomic bed.
     clear_download: bool = False,
         Whetever to delete the downloaded files or not.
         By default False.
@@ -72,15 +76,15 @@ def build_tasks(
     # Build the tasks
     return [
         {
-            "bed_path":bed_path,
+            "bed_path": bed_path,
             # Where to store the downloaded bigWig file
-            "epigenome_path": "{path}/{accession}.{file_format}".format(
-                path=path,
+            "epigenomes_path": "{epigenomes_path}/{accession}.{file_format}".format(
+                epigenomes_path=epigenomes_path,
                 **epigenome.to_dict()
             ),
             # Where to store the extracted regions
-            "target_path": "{path}/{accession}.bed".format(
-                path=path,
+            "target_path": "{target_path}/{accession}.bed".format(
+                target_path=target_path,
                 **epigenome.to_dict()
             ),
             "url": epigenome.url,
@@ -88,7 +92,7 @@ def build_tasks(
             "clear_download": clear_download
         }
         for _, epigenome in tqdm(epigenomes.iterrows(), total=len(epigenomes), desc="Building tasks")
-        if not os.path.exists("{path}/{accession}.bed".format(path=path, **epigenome.to_dict()))
+        if not os.path.exists("{target_path}/{accession}.bed".format(target_path=target_path, **epigenome.to_dict()))
     ]
 
 
@@ -96,7 +100,8 @@ def build(
     bed_path: str,
     cell_lines: List[str],
     nan_threshold: float = 0.9,
-    path: str = "epigenomes",
+    epigenomes_path: str = "epigenomes",
+    targets_path: str = "targets",
     clear_download: bool = False,
     workers: int = -1
 ):
@@ -110,8 +115,10 @@ def build(
         List of cell lines whose epigenomes are to retrieve.
     nan_threshold: float = 0.9,
         Percentage of NaNs to allow in every region.
-    path:str="epigenomes",
-        Path where to store the epigenomic data
+    epigenomes_path:str,
+        Path where to store the epigenomic bigWig.
+    targets_path:str,
+        Path where to store the epigenomic bed.
     clear_download: bool = False,
         Whetever to delete the downloaded files or not.
         By default False.
@@ -127,18 +134,23 @@ def build(
         If given nan threshold is not a float value between 0 and 1.
     """
     # Creating target directory if doesn't exist already
-    os.makedirs(path, exist_ok=True)
+    os.makedirs(epigenomes_path, exist_ok=True)
+    os.makedirs(targets_path, exist_ok=True)
     # Create the building tasks list
-    tasks = build_tasks(bed_path, cell_lines, nan_threshold, path, clear_download)
+    tasks = build_tasks(
+        bed_path, cell_lines,
+        nan_threshold, epigenomes_path,
+        targets_path, clear_download
+    )
     # Set workers number
     if workers == -1:
         workers = min(cpu_count(), len(tasks))
     if len(tasks) == 0:
-        warnings.warn("No epigenome still to be parsed, moving on.", category=UserWarning)
+        warnings.warn("No epigenome still to be parsed, moving on.",
+                      category=UserWarning)
     if workers < 1:
         raise ValueError(
             "Given workers number {} is neither -1 or a strictly positive integer.".format(workers))
-
     # Downloading and elaborating data
     with Pool(workers) as p:
         list(tqdm(

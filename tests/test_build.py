@@ -9,7 +9,8 @@ def run_me_twice(tmp, clear_download):
         bed_path="{}/test.bed".format(
             os.path.dirname(os.path.abspath(__file__))),
         cell_lines=["GM12892"],
-        path=tmp,
+        epigenomes_path=tmp,
+        targets_path=tmp,
         clear_download=clear_download
     )
     files = [

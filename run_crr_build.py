@@ -4,26 +4,10 @@ from notipy_me import Notipy
 
 
 with Notipy():
-    cell_lines_encode = [
-        "A549",
-        "GM12878",
-        "H1",
-        "HEK293",
-        "HepG2",
-        "K562",
-        "MCF-7"
-    ]
-    cell_lines_fantom = [
-        "A549",
-        "GM12878",
-        "H1",
-        "HEK293",
-        "HepG2",
-        "K562",
-        "MCF7"
-    ]
+    cell_lines = ["A549", "GM12878", "H1", "HEK293", "HepG2", "K562"]
+    cell_lines_encode = cell_lines + ["MCF-7"]
+    cell_lines_fantom = cell_lines + ["MCF7"]
     windows_size = 1000
-    path_to_bed = "regions.bed"
 
     enhancers, promoters = fantom(
         cell_lines=cell_lines_fantom, # list of cell lines to be considered.
@@ -40,19 +24,30 @@ with Notipy():
     enhancers.to_csv("enhancers.bed", sep="\t")
     promoters.to_csv("promoters.bed", sep="\t")
 
-    enhancers[[
-        "chrom",
-        "chromStart",
-        "chromEnd"
-    ]].to_csv("enhancers_regions.bed", sep="\t", header=False, index=False)
-
-    promoters[[
-        "chrom",
-        "chromStart",
-        "chromEnd"
-    ]].to_csv("promoters_regions.bed", sep="\t", header=False, index=False)
+    enhancers[["chrom","chromStart","chromEnd"]].to_csv(
+        "enhancers_regions.bed",
+        sep="\t",
+        header=False,
+        index=False
+    )
 
     build(
-        bed_path=path_to_bed,
-        cell_lines=cell_lines_encode
+        bed_path="enhancers_regions.bed",
+        cell_lines=cell_lines_encode,
+        epigenomes_path="epigenomes",
+        targets_path="enhancers"
+    )
+
+    promoters[["chrom","chromStart","chromEnd"]].to_csv(
+        "promoters_regions.bed",
+        sep="\t",
+        header=False,
+        index=False
+    )
+
+    build(
+        bed_path="promoters_regions.bed",
+        cell_lines=cell_lines_encode,
+        epigenomes_path="epigenomes",
+        targets_path="promoters"
     )
