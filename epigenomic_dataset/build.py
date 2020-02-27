@@ -158,5 +158,5 @@ def build(
             total=len(tasks),
             desc="Parsing epigenomes"
         ))
-        p.join()
         p.close()
+        p.join()
