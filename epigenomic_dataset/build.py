@@ -148,6 +148,7 @@ def build(
     if len(tasks) == 0:
         warnings.warn("No epigenome still to be parsed, moving on.",
                       category=UserWarning)
+        return
     if workers < 1:
         raise ValueError(
             "Given workers number {} is neither -1 or a strictly positive integer.".format(workers))
