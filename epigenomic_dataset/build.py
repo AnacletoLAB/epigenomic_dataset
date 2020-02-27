@@ -144,7 +144,8 @@ def build(
     )
     # Set workers number
     if workers == -1:
-        workers = min(cpu_count(), len(tasks))
+        workers = cpu_count()
+    workers = min(workers, cpu_count(), len(tasks))
     if len(tasks) == 0:
         warnings.warn("No epigenome still to be parsed, moving on.",
                       category=UserWarning)

@@ -36,7 +36,8 @@ with Notipy():
         bed_path="enhancers_regions.bed",
         cell_lines=cell_lines_encode,
         epigenomes_path="epigenomes",
-        targets_path="enhancers"
+        targets_path="enhancers",
+        workers=4
     )
 
     promoters[["chrom","chromStart","chromEnd"]].to_csv(
@@ -51,5 +52,6 @@ with Notipy():
         bed_path="promoters_regions.bed",
         cell_lines=cell_lines_encode,
         epigenomes_path="epigenomes",
-        targets_path="promoters"
+        targets_path="promoters",
+        workers=4
     )
