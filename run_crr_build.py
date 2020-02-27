@@ -9,6 +9,7 @@ with Notipy():
     cell_lines_fantom = cell_lines + ["MCF7"]
     windows_size = 1000
 
+    print("Downloading labels from FANTOM")
     enhancers, promoters = fantom(
         cell_lines=cell_lines_fantom, # list of cell lines to be considered.
         window_size=windows_size, # window size to use for the various regions.
@@ -30,7 +31,7 @@ with Notipy():
         header=False,
         index=False
     )
-
+    print("Parsing enhancers epigenomes")
     build(
         bed_path="enhancers_regions.bed",
         cell_lines=cell_lines_encode,
@@ -45,6 +46,7 @@ with Notipy():
         index=False
     )
 
+    print("Parsing promoters epigenomes")
     build(
         bed_path="promoters_regions.bed",
         cell_lines=cell_lines_encode,
