@@ -1,5 +1,7 @@
 encodeproject
 pybwtool
+crr_labels
+notipy_me
 
 [test]
 pytest

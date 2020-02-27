@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: epigenomic-dataset
-Version: 1.0.0
+Version: 1.0.1
 Summary: Python package wrapping ENCODE epigenomic data for a number of reference cell lines.
 Home-page: https://github.com/LucaCappelletti94/epigenomic_dataset
 Author: Luca Cappelletti
