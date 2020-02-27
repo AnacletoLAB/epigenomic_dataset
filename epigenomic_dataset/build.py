@@ -78,7 +78,7 @@ def build_tasks(
         {
             "bed_path": bed_path,
             # Where to store the downloaded bigWig file
-            "epigenomes_path": "{epigenomes_path}/{accession}.{file_format}".format(
+            "epigenome_path": "{epigenomes_path}/{accession}.{file_format}".format(
                 epigenomes_path=epigenomes_path,
                 **epigenome.to_dict()
             ),
