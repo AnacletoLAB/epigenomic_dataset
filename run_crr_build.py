@@ -35,6 +35,7 @@ with Notipy():
     build(
         bed_path="enhancers_regions.bed",
         cell_lines=cell_lines_encode,
+        nan_threshold=1,
         epigenomes_path="epigenomes",
         targets_path="enhancers",
         workers=4
@@ -51,6 +52,7 @@ with Notipy():
     build(
         bed_path="promoters_regions.bed",
         cell_lines=cell_lines_encode,
+        nan_threshold=1,
         epigenomes_path="epigenomes",
         targets_path="promoters",
         workers=4

@@ -99,7 +99,7 @@ def build_tasks(
 def build(
     bed_path: str,
     cell_lines: List[str],
-    nan_threshold: float = 0.9,
+    nan_threshold: float = 0.99,
     epigenomes_path: str = "epigenomes",
     targets_path: str = "targets",
     clear_download: bool = False,
