@@ -16,10 +16,17 @@ As usual, just download it using pip:
 
 Tests Coverage
 ----------------------------------------------
-Since some software handling coverages sometime get slightly
+Since some software handling coverages sometimes get slightly
 different results, here's three of them:
 
 |coveralls| |sonar_coverage| |code_climate_coverage|
+
+
+Preprocessed data
+---------------------------------------------
+We have already downloaded and obtained mean and max for each promoter and enhancer
+region for the cell lines ..., taking in consideration all the targets
+listed `in the complete table of epigenomes <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/epigenomic_dataset/epigenomes.csv>`__.
 
 Pipeline
 ----------------------------------------------
