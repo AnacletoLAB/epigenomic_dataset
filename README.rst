@@ -22,8 +22,8 @@ different results, here's three of them:
 |coveralls| |sonar_coverage| |code_climate_coverage|
 
 
-Preprocessed data
----------------------------------------------
+Preprocessed data for cis-regulatory regions
+-----------------------------------------------
 We have already downloaded and obtained mean and max for each promoter and enhancer
 region for the cell lines A549, GM12878, H1, HEK293, HepG2, K562, MCF7, taking in consideration all the targets
 listed `in the complete table of epigenomes <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/epigenomic_dataset/epigenomes.csv>`__.
