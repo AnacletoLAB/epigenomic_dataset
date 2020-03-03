@@ -4,9 +4,10 @@ from notipy_me import Notipy
 
 
 with Notipy():
-    cell_lines = ["A549", "GM12878", "H1", "HepG2", "K562"]# ,"HEK293"]
+    cell_lines = ["A549", "GM12878", "H1", "HEK293", "HepG2", "K562"]
     cell_lines_encode = cell_lines + ["MCF-7"]
     cell_lines_fantom = cell_lines + ["MCF7"]
+    cell_lines_roadmap = ["A549", "GM12878", "H1", "HepG2", "K562"]
     windows_size = 1000
 
     # print("Downloading labels from FANTOM")
@@ -60,8 +61,8 @@ with Notipy():
 
     print("Downloading labels from ROADMAP")
     enhancers, promoters = roadmap(
-        cell_lines = cell_lines_fantom, # List of cell lines to be considered.
-        window_size = 1000, # Window size to use for the various regions.
+        cell_lines = cell_lines_roadmap, # List of cell lines to be considered.
+        window_size = windows_size, # Window size to use for the various regions.
         genome = "hg19", # Considered genome version. Currently supported only "hg19".
         states = 18, # Number of the states of the model to consider. Currently supported only "15" and "18".
         enhancers_labels = ("7_Enh", "9_EnhA1", "10_EnhA2"), # Labels to encode as active enhancers.
