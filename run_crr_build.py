@@ -4,7 +4,7 @@ from notipy_me import Notipy
 
 
 with Notipy():
-    cell_lines = ["A549", "GM12878", "H1", "HEK293", "HepG2", "K562"]
+    cell_lines = ["A549", "GM12878", "H1", "HepG2", "K562"]# ,"HEK293"]
     cell_lines_encode = cell_lines + ["MCF-7"]
     cell_lines_fantom = cell_lines + ["MCF7"]
     windows_size = 1000
