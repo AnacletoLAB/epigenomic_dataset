@@ -85,7 +85,7 @@ with Notipy():
         nan_threshold=1,
         epigenomes_path="epigenomes",
         targets_path="roadmap_enhancers",
-        workers=4
+        workers=1
     )
 
     promoters[["chrom","chromStart","chromEnd"]].to_csv(
@@ -102,5 +102,5 @@ with Notipy():
         nan_threshold=1,
         epigenomes_path="epigenomes",
         targets_path="roadmap_promoters",
-        workers=4
+        workers=1
     )
