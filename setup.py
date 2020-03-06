@@ -60,10 +60,10 @@ setup(
     tests_require=test_deps,
     # Add here the package dependencies
     install_requires=[
-        "encodeproject",
-        "pybwtool",
-        "crr_labels",
-        "notipy_me"
+        "encodeproject>=1.0.8",
+        "pybwtool>=1.0.4",
+        "crr_labels>=1.0.7",
+        "notipy_me>=1.3.11"
     ],
     extras_require=extras,
 )
