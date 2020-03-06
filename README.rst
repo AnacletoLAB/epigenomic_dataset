@@ -4,7 +4,7 @@ epigenomic_dataset
 |codacy| |code_climate_maintainability| |pip| |downloads|
 
 Python package wrapping ENCODE epigenomic data
-for a number of reference cell lines.
+for several reference cell lines.
 
 How do I install this package?
 ----------------------------------------------
@@ -88,7 +88,7 @@ If you want to specify where to store the files use:
         path="path/to/my/target"
     )
 
-By default the downloaded bigWig files are not deleted.
+By default, the downloaded bigWig files are not deleted.
 You can choose to delete the files as follows:
 
 .. code:: python
@@ -100,20 +100,6 @@ You can choose to delete the files as follows:
         cell_lines=["HepG2", "H1"],
         path="path/to/my/target",
         clear_download=True
-    )
-
-Finally, you can use a custom **NaN threshold** to drop windows
-that contain too many NaNs. For instance, if you want to drop
-the rows that have more than 60% of NaN you can use:
-
-.. code:: python
-
-    from epigenomic_dataset import build
-
-    build(
-        bed_path="path/to/my/bed/file.bed",
-        cell_lines=["HepG2", "H1"],
-        nan_threshold=0.6
     )
 
 
