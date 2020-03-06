@@ -8,39 +8,36 @@ from multiprocessing import Pool, cpu_count
 import warnings
 
 
-def job(
+def extraction_job(
     bed_path: str,
     epigenome_path: str,
     target_path: str,
     url: str,
-    nan_threshold: float,
     clear_download: bool
 ):
     # Download file if it does not already exist
     if not os.path.exists(epigenome_path):
         download(url, epigenome_path)
+
     # Extract the features
-    bed, scores = extract(
+    extract(
         bed_path=bed_path,
         bigwig_path=epigenome_path,
-        nan_threshold=nan_threshold
+        target=target_path
     )
-    # Save the obtained features
-    pd.concat([bed, scores], axis=1).to_csv(target_path, sep="\t")
 
     # Remove the bigwig file if required
     if clear_download:
         os.remove(epigenome_path)
 
 
-def _job(kwargs):
-    return job(**kwargs)
+def _extraction_job(kwargs):
+    return extraction_job(**kwargs)
 
 
-def build_tasks(
+def build_extraction_tasks(
     bed_path: str,
     cell_lines: List[str],
-    nan_threshold: float,
     epigenomes_path: str,
     target_path: str,
     clear_download: bool
@@ -53,8 +50,6 @@ def build_tasks(
         Either path to the bed file containing the regions of interest.
     cell_lines:List[str],
         List of cell lines whose epigenomes are to retrieve.
-    nan_threshold: float = 0.9,
-        Percentage of NaNs to allow in every region.
     epigenomes_path:str,
         Path where to store the epigenomic bigWig.
     target_path:str,
@@ -88,7 +83,6 @@ def build_tasks(
                 **epigenome.to_dict()
             ),
             "url": epigenome.url,
-            "nan_threshold": nan_threshold,
             "clear_download": clear_download
         }
         for _, epigenome in tqdm(epigenomes.iterrows(), total=len(epigenomes), desc="Building tasks")
@@ -99,7 +93,6 @@ def build_tasks(
 def build(
     bed_path: str,
     cell_lines: List[str],
-    nan_threshold: float = 0.99,
     epigenomes_path: str = "epigenomes",
     targets_path: str = "targets",
     clear_download: bool = False,
@@ -113,8 +106,6 @@ def build(
         Either path to the bed file containing the regions of interest.
     cell_lines:List[str],
         List of cell lines whose epigenomes are to retrieve.
-    nan_threshold: float = 0.9,
-        Percentage of NaNs to allow in every region.
     epigenomes_path:str,
         Path where to store the epigenomic bigWig.
     targets_path:str,
@@ -137,9 +128,9 @@ def build(
     os.makedirs(epigenomes_path, exist_ok=True)
     os.makedirs(targets_path, exist_ok=True)
     # Create the building tasks list
-    tasks = build_tasks(
+    tasks = build_extraction_tasks(
         bed_path, cell_lines,
-        nan_threshold, epigenomes_path,
+        epigenomes_path,
         targets_path, clear_download
     )
     # Set workers number
@@ -156,7 +147,7 @@ def build(
     # Downloading and elaborating data
     with Pool(workers) as p:
         list(tqdm(
-            p.imap(_job, tasks),
+            p.imap(_extraction_job, tasks),
             total=len(tasks),
             desc="Parsing epigenomes"
         ))

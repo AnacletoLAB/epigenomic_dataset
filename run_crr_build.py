@@ -1,6 +1,44 @@
 from crr_labels import fantom, roadmap
 from epigenomic_dataset import build
+import pandas as pd
+from typing import List
+import os
 from notipy_me import Notipy
+
+
+def build_bed(
+    bed: pd.DataFrame,
+    root: str,
+    target: str,
+    cell_lines: List[str],
+    workers: int = 8
+):
+    path = "{root}/{target}/{target}.bed".format(
+        root=root,
+        target=target
+    )
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    bed.to_csv(path, sep="\t", index=False)
+    regions_path = "{root}/{target}/regions.bed".format(
+        root=root,
+        target=target
+    )
+    enhancers[["chrom", "chromStart", "chromEnd"]].to_csv(
+        regions_path,
+        sep="\t",
+        header=False,
+        index=False
+    )
+    build(
+        bed_path=regions_path,
+        cell_lines=cell_lines,
+        epigenomes_path="epigenomes",
+        targets_path="{root}/{target}".format(
+            root=root,
+            target=target
+        ),
+        workers=workers
+    )
 
 
 with Notipy():
@@ -10,97 +48,50 @@ with Notipy():
     cell_lines_roadmap = ["A549", "GM12878", "H1", "HepG2", "K562"]
     windows_size = 1000
 
-    # print("Downloading labels from FANTOM")
-    # enhancers, promoters = fantom(
-    #     cell_lines=cell_lines_fantom, # list of cell lines to be considered.
-    #     window_size=windows_size, # window size to use for the various regions.
-    #     genome = "hg19", # considered genome version. Currently supported only "hg19".
-    #     center_enhancers = "peak", # how to center the enhancer window, either around "peak" or the "center" of the region.
-    #     enhancers_threshold = 0, # activation threshold for the enhancers.
-    #     promoters_threshold = 5, # activation threshold for the promoters.
-    #     drop_always_inactive_rows = False, # whetever to drop the rows where no activation is detected for every rows.
-    #     binarize = True, # Whetever to return the data binary-encoded, zero for inactive, one for active.
-    #     nrows = None # the number of rows to read, usefull when testing pipelines for creating smaller datasets.
-    # )
+    enhancers, promoters = fantom(
+        cell_lines=cell_lines_fantom,  # list of cell lines to be considered.
+        # window size to use for the various regions.
+        window_size=windows_size,
+        # whetever to drop the rows where no activation is detected for every rows.
+        drop_always_inactive_rows=False
+    )
 
-    # enhancers.to_csv("fantom_enhancers.bed", sep="\t")
-    # promoters.to_csv("fantom_promoters.bed", sep="\t")
+    assert (enhancers.chromEnd - enhancers.chromStart == windows_size).all()
+    assert (promoters.chromEnd - promoters.chromStart == windows_size).all()
 
-    # enhancers[["chrom","chromStart","chromEnd"]].to_csv(
-    #     "enhancers_regions.bed",
-    #     sep="\t",
-    #     header=False,
-    #     index=False
-    # )
-    # print("Parsing enhancers epigenomes")
-    # build(
-    #     bed_path="enhancers_regions.bed",
-    #     cell_lines=cell_lines_encode,
-    #     nan_threshold=1,
-    #     epigenomes_path="epigenomes",
-    #     targets_path="fantom_enhancers",
-    #     workers=4
-    # )
+    build_bed(
+        enhancers,
+        root="fantom",
+        target="enhancers",
+        cell_lines=cell_lines_fantom
+    )
 
-    # promoters[["chrom","chromStart","chromEnd"]].to_csv(
-    #     "promoters_regions.bed",
-    #     sep="\t",
-    #     header=False,
-    #     index=False
-    # )
+    build_bed(
+        promoters,
+        root="fantom",
+        target="promoters",
+        cell_lines=cell_lines_fantom
+    )
 
-    # print("Parsing promoters epigenomes")
-    # build(
-    #     bed_path="promoters_regions.bed",
-    #     cell_lines=cell_lines_encode,
-    #     nan_threshold=1,
-    #     epigenomes_path="epigenomes",
-    #     targets_path="fantom_promoters",
-    #     workers=4
-    # )
-
-    print("Downloading labels from ROADMAP")
     enhancers, promoters = roadmap(
-        cell_lines = cell_lines_roadmap, # List of cell lines to be considered.
-        window_size = windows_size, # Window size to use for the various regions.
-        genome = "hg19", # Considered genome version. Currently supported only "hg19".
-        states = 18, # Number of the states of the model to consider. Currently supported only "15" and "18".
-        enhancers_labels = ("7_Enh", "9_EnhA1", "10_EnhA2"), # Labels to encode as active enhancers.
-        promoters_labels = ("1_TssA",), # Labels to enode as active promoters.
+        cell_lines=cell_lines_roadmap,  # List of cell lines to be considered.
+        # Window size to use for the various regions.
+        window_size=windows_size,
     )
 
-    enhancers.to_csv("roadmap_enhancers.bed", sep="\t")
-    promoters.to_csv("roadmap_promoters.bed", sep="\t")
+    assert (enhancers.chromEnd - enhancers.chromStart == windows_size).all()
+    assert (promoters.chromEnd - promoters.chromStart == windows_size).all()
 
-    enhancers[["chrom","chromStart","chromEnd"]].to_csv(
-        "roadmap_enhancers_regions.bed",
-        sep="\t",
-        header=False,
-        index=False
-    )
-    print("Parsing enhancers epigenomes")
-    build(
-        bed_path="roadmap_enhancers_regions.bed",
-        cell_lines=cell_lines_encode,
-        nan_threshold=1,
-        epigenomes_path="epigenomes",
-        targets_path="roadmap_enhancers",
-        workers=1
+    build_bed(
+        enhancers,
+        root="fantom",
+        target="enhancers",
+        cell_lines=cell_lines_roadmap
     )
 
-    promoters[["chrom","chromStart","chromEnd"]].to_csv(
-        "roadmap_promoters_regions.bed",
-        sep="\t",
-        header=False,
-        index=False
-    )
-
-    print("Parsing promoters epigenomes")
-    build(
-        bed_path="roadmap_promoters_regions.bed",
-        cell_lines=cell_lines_encode,
-        nan_threshold=1,
-        epigenomes_path="epigenomes",
-        targets_path="roadmap_promoters",
-        workers=1
+    build_bed(
+        promoters,
+        root="fantom",
+        target="promoters",
+        cell_lines=cell_lines_roadmap
     )
