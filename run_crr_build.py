@@ -84,14 +84,14 @@ with Notipy():
 
     build_bed(
         enhancers,
-        root="fantom",
+        root="roadmap",
         target="enhancers",
         cell_lines=cell_lines_roadmap
     )
 
     build_bed(
         promoters,
-        root="fantom",
+        root="roadmap",
         target="promoters",
         cell_lines=cell_lines_roadmap
     )
