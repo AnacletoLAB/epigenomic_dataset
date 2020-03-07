@@ -48,6 +48,7 @@ with Notipy():
     cell_lines_roadmap = ["A549", "GM12878", "H1", "HepG2", "K562"]
     windows_size = 1000
 
+    print("Retrieving FANTOM labels")
     enhancers, promoters = fantom(
         cell_lines=cell_lines_fantom,  # list of cell lines to be considered.
         # window size to use for the various regions.
@@ -73,6 +74,7 @@ with Notipy():
         cell_lines=cell_lines_fantom
     )
 
+    print("Retrieving ROADMAP labels")
     enhancers, promoters = roadmap(
         cell_lines=cell_lines_roadmap,  # List of cell lines to be considered.
         # Window size to use for the various regions.
