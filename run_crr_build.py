@@ -11,7 +11,7 @@ def build_bed(
     root: str,
     target: str,
     cell_lines: List[str],
-    workers: int = 20
+    workers: int = 12
 ):
     path = "{root}/{target}/{target}.bed".format(
         root=root,
