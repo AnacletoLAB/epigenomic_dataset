@@ -78,7 +78,7 @@ def build_extraction_tasks(
                 **epigenome.to_dict()
             ),
             # Where to store the extracted regions
-            "target_path": "{target_path}/{accession}.bed".format(
+            "target_path": "{target_path}/{accession}.bed.gz".format(
                 target_path=target_path,
                 **epigenome.to_dict()
             ),
