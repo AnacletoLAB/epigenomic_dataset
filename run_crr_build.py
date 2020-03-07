@@ -23,7 +23,16 @@ def build_bed(
         root=root,
         target=target
     )
-    enhancers[["chrom", "chromStart", "chromEnd"]].to_csv(
+    bed["name"] = [
+        "{chrom}.{chromStart}.{chromEnd}".format(
+            **row.to_dict()
+        )
+        for _, row in bed.iterrows()
+    ]
+
+    bed["score"] = 0
+
+    bed[["chrom", "chromStart", "chromEnd", "name", "score", "strand"]].to_csv(
         regions_path,
         sep="\t",
         header=False,
