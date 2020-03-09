@@ -24,7 +24,7 @@ def build_bed(
     cell_lines: List[str],
     workers: int = 12
 ):
-    path = get_bed_path(root, path)
+    path = get_bed_path(root, target)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     bed.to_csv(path, sep="\t", index=False)
     regions_path = "{root}/{target}/regions.bed".format(
