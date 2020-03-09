@@ -5,6 +5,17 @@ from typing import List
 import os
 from notipy_me import Notipy
 
+def get_bed_path(root, target):
+    return "{root}/{target}/{target}.bed".format(
+        root=root,
+        target=target
+    )
+
+def bed_files_exist(root):
+    return (
+        os.path.exists(get_bed_path(root, "promoters")) and
+        os.path.exists(get_bed_path(root, "enhancers"))
+    )
 
 def build_bed(
     bed: pd.DataFrame,
@@ -13,10 +24,7 @@ def build_bed(
     cell_lines: List[str],
     workers: int = 12
 ):
-    path = "{root}/{target}/{target}.bed".format(
-        root=root,
-        target=target
-    )
+    path = get_bed_path(root, path)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     bed.to_csv(path, sep="\t", index=False)
     regions_path = "{root}/{target}/regions.bed".format(
@@ -58,13 +66,17 @@ with Notipy():
     windows_size = 1000
 
     print("Retrieving FANTOM labels")
-    enhancers, promoters = fantom(
-        cell_lines=cell_lines_fantom,  # list of cell lines to be considered.
-        # window size to use for the various regions.
-        window_size=windows_size,
-        # whetever to drop the rows where no activation is detected for every rows.
-        drop_always_inactive_rows=False
-    )
+    if bed_files_exist("fantom"):
+        enhancers, promoters = fantom(
+            cell_lines=cell_lines_fantom,  # list of cell lines to be considered.
+            # window size to use for the various regions.
+            window_size=windows_size,
+            # whetever to drop the rows where no activation is detected for every rows.
+            drop_always_inactive_rows=False
+        )
+    else:
+        enhancers = pd.read_csv(get_bed_path("fantom", "enhancers"), sep="\t")
+        promoters = pd.read_csv(get_bed_path("fantom", "promoters"), sep="\t")
 
     assert (enhancers.chromEnd - enhancers.chromStart == windows_size).all()
     assert (promoters.chromEnd - promoters.chromStart == windows_size).all()
@@ -84,11 +96,15 @@ with Notipy():
     )
 
     print("Retrieving ROADMAP labels")
-    enhancers, promoters = roadmap(
-        cell_lines=cell_lines_roadmap,  # List of cell lines to be considered.
-        # Window size to use for the various regions.
-        window_size=windows_size,
-    )
+    if bed_files_exist("fantom"):
+        enhancers, promoters = roadmap(
+            cell_lines=cell_lines_roadmap,  # List of cell lines to be considered.
+            # Window size to use for the various regions.
+            window_size=windows_size,
+        )
+    else:
+        enhancers = pd.read_csv(get_bed_path("fantom", "enhancers"), sep="\t")
+        promoters = pd.read_csv(get_bed_path("fantom", "promoters"), sep="\t")
 
     assert (enhancers.chromEnd - enhancers.chromStart == windows_size).all()
     assert (promoters.chromEnd - promoters.chromStart == windows_size).all()
