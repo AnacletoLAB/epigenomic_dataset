@@ -1,38 +1,40 @@
 from crr_labels import fantom, roadmap
-from epigenomic_dataset import build, mine, concatenate
+from epigenomic_dataset import build
 import pandas as pd
 from typing import List
 import os
 from notipy_me import Notipy
 
 
-def get_bed_path(root, target):
-    return "{root}/{target}/{target}.bed".format(
+def get_bed_path(root, region, window_size):
+    return "{root}/{window_size}/{region}.bed".format(
         root=root,
-        target=target
+        window_size=window_size,
+        region=region
     )
 
 
-def bed_files_exist(root):
+def bed_files_exist(root, window_size):
     return (
-        os.path.exists(get_bed_path(root, "promoters")) and
-        os.path.exists(get_bed_path(root, "enhancers"))
+        os.path.exists(get_bed_path(root, "promoters", window_size)) and
+        os.path.exists(get_bed_path(root, "enhancers", window_size))
     )
 
 
-def build_bed(
+def run_pipeline(
     bed: pd.DataFrame,
     root: str,
-    target: str,
-    cell_lines: List[str],
-    workers: int = 12
+    region: str,
+    windows_size: int,
+    cell_lines: List[str]
 ):
-    path = get_bed_path(root, target)
+    path = get_bed_path(root, region, windows_size)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     bed.to_csv(path, sep="\t", index=False)
-    regions_path = "{root}/{target}/regions.bed".format(
+    regions_path = "{root}/{windows_size}/{region}/regions.bed".format(
         root=root,
-        target=target
+        windows_size=windows_size,
+        region=region
     )
     bed["name"] = [
         "{chrom}.{chromStart}.{chromEnd}".format(
@@ -52,12 +54,13 @@ def build_bed(
     build(
         bed_path=regions_path,
         cell_lines=cell_lines,
-        epigenomes_path="epigenomes",
-        targets_path="{root}/{target}".format(
+        targets_path="{root}/{windows_size}/{region}".format(
             root=root,
-            target=target
+            windows_size=windows_size,
+            region=region
         ),
-        workers=workers
+        extraction_workers=12,
+        concatenation_workers=20
     )
 
 
@@ -69,15 +72,11 @@ if __name__ == "__main__":
         cell_lines_roadmap = ["A549", "GM12878", "H1", "HepG2", "K562"]
         windows_size = 1000
 
-        statistics = {
-            "max": True,
-            "min": False,
-            "mean": False,
-            "var": False,
-            "median": False
-        }
+        ####################################################
+        # HERE WE BUILD FANTOM                             #
+        ####################################################
 
-        if not bed_files_exist("fantom"):
+        if not bed_files_exist("fantom", windows_size):
             print("Retrieving FANTOM labels")
             enhancers, promoters = fantom(
                 # list of cell lines to be considered.
@@ -89,30 +88,29 @@ if __name__ == "__main__":
             )
         else:
             print("Loading FANTOM labels")
-            enhancers = pd.read_csv(get_bed_path("fantom", "enhancers"), sep="\t")
-            promoters = pd.read_csv(get_bed_path("fantom", "promoters"), sep="\t")
+            enhancers = pd.read_csv(get_bed_path("fantom", "enhancers", windows_size), sep="\t")
+            promoters = pd.read_csv(get_bed_path("fantom", "promoters", windows_size), sep="\t")
 
-        assert (enhancers.chromEnd - enhancers.chromStart == windows_size).all()
-        assert (promoters.chromEnd - promoters.chromStart == windows_size).all()
-
-        build_bed(
+        run_pipeline(
             enhancers,
             root="fantom",
-            target="enhancers",
+            region="enhancers",
+            windows_size=windows_size,
             cell_lines=cell_lines_encode
         )
-
-        build_bed(
+        run_pipeline(
             promoters,
             root="fantom",
-            target="promoters",
+            region="promoters",
+            windows_size=windows_size,
             cell_lines=cell_lines_encode
         )
 
-        mine("fantom", statistics)
-        concatenate("fantom", cell_lines_encode, 20)
+        ####################################################
+        # HERE WE BUILD ROADMAP                            #
+        ####################################################
 
-        if not bed_files_exist("roadmap"):
+        if not bed_files_exist("roadmap", windows_size):
             print("Retrieving ROADMAP labels")
             enhancers, promoters = roadmap(
                 # List of cell lines to be considered.
@@ -122,25 +120,20 @@ if __name__ == "__main__":
             )
         else:
             print("Loading ROADMAP labels")
-            enhancers = pd.read_csv(get_bed_path("roadmap", "enhancers"), sep="\t")
-            promoters = pd.read_csv(get_bed_path("roadmap", "promoters"), sep="\t")
-
-        assert (enhancers.chromEnd - enhancers.chromStart == windows_size).all()
-        assert (promoters.chromEnd - promoters.chromStart == windows_size).all()
-
-        build_bed(
+            enhancers = pd.read_csv(get_bed_path("roadmap", "enhancers", windows_size), sep="\t")
+            promoters = pd.read_csv(get_bed_path("roadmap", "promoters", windows_size), sep="\t")
+        
+        run_pipeline(
             enhancers,
             root="roadmap",
-            target="enhancers",
+            region="enhancers",
+            windows_size=windows_size,
             cell_lines=cell_lines_roadmap
         )
-
-        build_bed(
+        run_pipeline(
             promoters,
             root="roadmap",
-            target="promoters",
+            region="promoters",
+            windows_size=windows_size,
             cell_lines=cell_lines_roadmap
         )
-
-        mine("roadmap", statistics)
-        concatenate("roadmap", cell_lines_roadmap, 20)
