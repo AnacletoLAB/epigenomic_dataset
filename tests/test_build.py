@@ -1,14 +1,15 @@
 import os
-from epigenomic_dataset import build
+from epigenomic_dataset import build, mine, concatenate
 import shutil
 import pandas as pd
 
 
 def run_me_twice(tmp, clear_download):
+    cell_lines = ["GM12892"]
     build(
         bed_path="{}/test.bed".format(
             os.path.dirname(os.path.abspath(__file__))),
-        cell_lines=["GM12892"],
+        cell_lines=cell_lines,
         epigenomes_path=tmp,
         targets_path=tmp,
         clear_download=clear_download
@@ -26,6 +27,8 @@ def run_me_twice(tmp, clear_download):
                 bed=bed
             ), sep="\t")
         )
+    mine(tmp, {"max":True})
+    concatenate(tmp, cell_lines, 1)
 
 
 def test_build():
