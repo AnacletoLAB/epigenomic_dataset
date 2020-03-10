@@ -36,6 +36,8 @@ def run_pipeline(
         windows_size=windows_size,
         region=region
     )
+    os.makedirs(os.path.dirname(regions_path), exist_ok=True)
+
     bed["name"] = [
         "{chrom}.{chromStart}.{chromEnd}".format(
             **row.to_dict()
