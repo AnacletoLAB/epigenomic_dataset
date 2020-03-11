@@ -110,10 +110,10 @@ if __name__ == "__main__":
                 cell_lines=cell_lines_encode
             )
             
-            r.add_report(pd.DataFrame({
+            r.add_report{
                 "window_size":windows_size,
                 "dataset":"fantom"
-            }))
+            })
 
             ####################################################
             # HERE WE BUILD ROADMAP                            #
@@ -147,7 +147,7 @@ if __name__ == "__main__":
                 cell_lines=cell_lines_roadmap
             )
 
-            r.add_report(pd.DataFrame({
+            r.add_report({
                 "window_size":windows_size,
                 "dataset":"roadmap"
-            }))
+            })
