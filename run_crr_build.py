@@ -110,7 +110,7 @@ if __name__ == "__main__":
                 cell_lines=cell_lines_encode
             )
             
-            r.add_report{
+            r.add_report({
                 "window_size":windows_size,
                 "dataset":"fantom"
             })
