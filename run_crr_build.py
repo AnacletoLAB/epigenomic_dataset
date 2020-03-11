@@ -3,6 +3,7 @@ from epigenomic_dataset import build
 import pandas as pd
 from typing import List
 import os
+from tqdm.auto import tqdm
 from notipy_me import Notipy
 
 
@@ -67,75 +68,86 @@ def run_pipeline(
 
 
 if __name__ == "__main__":
-    with Notipy():
+    with Notipy() as r:
         cell_lines = ["A549", "GM12878", "H1", "HEK293", "HepG2", "K562"]
         cell_lines_encode = cell_lines + ["MCF-7"]
         cell_lines_fantom = cell_lines + ["MCF7"]
         cell_lines_roadmap = ["A549", "GM12878", "H1", "HepG2", "K562"]
-        windows_size = 1000
+        windows_sizes = (1000, 500, 300, 200, 100)
 
-        ####################################################
-        # HERE WE BUILD FANTOM                             #
-        ####################################################
+        for windows_size in tqdm(windows_sizes, desc="Parsing window sizes"):
+            ####################################################
+            # HERE WE BUILD FANTOM                             #
+            ####################################################
 
-        if not bed_files_exist("fantom", windows_size):
-            print("Retrieving FANTOM labels")
-            enhancers, promoters = fantom(
-                # list of cell lines to be considered.
-                cell_lines=cell_lines_fantom,
-                # window size to use for the various regions.
-                window_size=windows_size,
-                # whetever to drop the rows where no activation is detected for every rows.
-                drop_always_inactive_rows=False
+            if not bed_files_exist("fantom", windows_size):
+                print("Retrieving FANTOM labels")
+                enhancers, promoters = fantom(
+                    # list of cell lines to be considered.
+                    cell_lines=cell_lines_fantom,
+                    # window size to use for the various regions.
+                    window_size=windows_size,
+                    # whetever to drop the rows where no activation is detected for every rows.
+                    drop_always_inactive_rows=False
+                )
+            else:
+                print("Loading FANTOM labels")
+                enhancers = pd.read_csv(get_bed_path("fantom", "enhancers", windows_size), sep="\t")
+                promoters = pd.read_csv(get_bed_path("fantom", "promoters", windows_size), sep="\t")
+
+            run_pipeline(
+                enhancers,
+                root="fantom",
+                region="enhancers",
+                windows_size=windows_size,
+                cell_lines=cell_lines_encode
             )
-        else:
-            print("Loading FANTOM labels")
-            enhancers = pd.read_csv(get_bed_path("fantom", "enhancers", windows_size), sep="\t")
-            promoters = pd.read_csv(get_bed_path("fantom", "promoters", windows_size), sep="\t")
-
-        run_pipeline(
-            enhancers,
-            root="fantom",
-            region="enhancers",
-            windows_size=windows_size,
-            cell_lines=cell_lines_encode
-        )
-        run_pipeline(
-            promoters,
-            root="fantom",
-            region="promoters",
-            windows_size=windows_size,
-            cell_lines=cell_lines_encode
-        )
-
-        ####################################################
-        # HERE WE BUILD ROADMAP                            #
-        ####################################################
-
-        if not bed_files_exist("roadmap", windows_size):
-            print("Retrieving ROADMAP labels")
-            enhancers, promoters = roadmap(
-                # List of cell lines to be considered.
-                cell_lines=cell_lines_roadmap,
-                # Window size to use for the various regions.
-                window_size=windows_size,
+            run_pipeline(
+                promoters,
+                root="fantom",
+                region="promoters",
+                windows_size=windows_size,
+                cell_lines=cell_lines_encode
             )
-        else:
-            print("Loading ROADMAP labels")
-            enhancers = pd.read_csv(get_bed_path("roadmap", "enhancers", windows_size), sep="\t")
-            promoters = pd.read_csv(get_bed_path("roadmap", "promoters", windows_size), sep="\t")
-        
-        run_pipeline(
-            enhancers,
-            root="roadmap",
-            region="enhancers",
-            windows_size=windows_size,
-            cell_lines=cell_lines_roadmap
-        )
-        run_pipeline(
-            promoters,
-            root="roadmap",
-            region="promoters",
-            windows_size=windows_size,
-            cell_lines=cell_lines_roadmap
-        )
+            
+            r.add_report(pd.DataFrame({
+                "window_size":windows_size,
+                "dataset":"fantom"
+            }))
+
+            ####################################################
+            # HERE WE BUILD ROADMAP                            #
+            ####################################################
+
+            if not bed_files_exist("roadmap", windows_size):
+                print("Retrieving ROADMAP labels")
+                enhancers, promoters = roadmap(
+                    # List of cell lines to be considered.
+                    cell_lines=cell_lines_roadmap,
+                    # Window size to use for the various regions.
+                    window_size=windows_size,
+                )
+            else:
+                print("Loading ROADMAP labels")
+                enhancers = pd.read_csv(get_bed_path("roadmap", "enhancers", windows_size), sep="\t")
+                promoters = pd.read_csv(get_bed_path("roadmap", "promoters", windows_size), sep="\t")
+            
+            run_pipeline(
+                enhancers,
+                root="roadmap",
+                region="enhancers",
+                windows_size=windows_size,
+                cell_lines=cell_lines_roadmap
+            )
+            run_pipeline(
+                promoters,
+                root="roadmap",
+                region="promoters",
+                windows_size=windows_size,
+                cell_lines=cell_lines_roadmap
+            )
+
+            r.add_report(pd.DataFrame({
+                "window_size":windows_size,
+                "dataset":"roadmap"
+            }))
