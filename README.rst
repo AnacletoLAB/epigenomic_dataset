@@ -73,7 +73,10 @@ Here are the labels for all the considered cell lines.
 
 TODO: align promoters and enhancers in a reference labels dataset.
 
-Pipeline
+The complete pipeline used to retrieve the CRR epigenomic data is available
+` here <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/run_crr_build.py>`__.
+
+Pipeline for epigenomic data
 ----------------------------------------------
 The considered raw data are from `this query from the ENCODE project <https://www.encodeproject.org/search/?searchTerm=fold+change+over+control&type=Experiment&assembly=hg19&status=released&biosample_ontology.classification=cell+line&files.file_type=bigWig&replication_type=isogenic&audit.ERROR.category%21=extremely+low+read+depth&audit.ERROR.category%21=inconsistent+genetic+modification+reagent+source+and+identifier&audit.ERROR.category%21=missing+control+alignments&audit.ERROR.category%21=extremely+low+read+length&audit.NOT_COMPLIANT.category%21=insufficient+read+depth&audit.NOT_COMPLIANT.category%21=missing+controlled_by&audit.NOT_COMPLIANT.category%21=insufficient+read+length&audit.NOT_COMPLIANT.category%21=insufficient+replicate+concordance&audit.NOT_COMPLIANT.category%21=severe+bottlenecking&audit.NOT_COMPLIANT.category%21=control+insufficient+read+depth&audit.NOT_COMPLIANT.category%21=poor+library+complexity&limit=all>`_
 
