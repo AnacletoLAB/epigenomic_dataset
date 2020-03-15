@@ -44,9 +44,9 @@ def load_epigenomes_table(cell_lines: List[str]):
     return epigenomes[epigenomes.cell_line.isin(cell_lines)]
 
 
-def load_accession_path(target: str, accession: str) -> str:
+def load_accession_path(root: str, accession: str) -> str:
     return "{root}/{accession}.bed.gz".format(
-        target_path=target,
+        root=root,
         accession=accession
     )
 
