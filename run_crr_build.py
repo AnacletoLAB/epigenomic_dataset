@@ -73,7 +73,7 @@ if __name__ == "__main__":
         cell_lines_encode = cell_lines + ["MCF-7"]
         cell_lines_fantom = cell_lines + ["MCF7"]
         cell_lines_roadmap = ["A549", "GM12878", "H1", "HepG2", "K562"]
-        windows_sizes = (1000, 500, 300, 200, 100)
+        windows_sizes = (1000, 200)
 
         for windows_size in tqdm(windows_sizes, desc="Parsing window sizes"):
             ####################################################
