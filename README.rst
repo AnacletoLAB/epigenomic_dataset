@@ -24,15 +24,14 @@ different results, here's three of them:
 
 Preprocessed data for cis-regulatory regions
 -----------------------------------------------
-We have already downloaded and obtained mean and max for each promoter and enhancer
-region for the cell lines A549, GM12878, H1, HEK293, HepG2, K562, MCF7, taking in consideration all the targets
-listed `in the complete table of epigenomes <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/epigenomic_dataset/epigenomes.csv>`__.
+We have already downloaded and obtained the max window value for each promoter and enhancer
+region for the cell lines A549, GM12878, H1, HEK293, HepG2, K562 and MCF7 in the dataset Fantom
+and cell lines A549, GM12878, H1, HepG2 and K562 for the Roadmao dataset taking in consideration
+all the target features listed `in the complete table of epigenomes <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/epigenomic_dataset/epigenomes.csv>`__.
 
-The promoters and enhancers considered are taken from FANTOM,
-as can be downloaded by using the `crr_labels <https://github.com/LucaCappelletti94/crr_labels>`_ pipeline.
-
-The specific bed files and labels used can be found `here for the promoters <https://raw.githubusercontent.com/LucaCappelletti94/epigenomic_dataset/master/preprocessed/promoters/promoters.bed>`_
-and `here for the enhancers <https://raw.githubusercontent.com/LucaCappelletti94/epigenomic_dataset/master/preprocessed/enhancers/enhancers.bed>`_.
+The thresholds used for classyfing the activations of enhancers and promoters in Fantom are the
+default explained in the sister pipeline `CRR labels <https://github.com/LucaCappelletti94/crr_labels>`__
+which handles the download and preprocessing of the data from Fantom and Roadmap.
 
 +-------------------+---------------------+------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
 |   Dataset         |   Cell line         |   Promoters                                                                                                                                                                                                                                                                           |   Enhancers                                                                                                                                                                                                                                                                           |
@@ -62,6 +61,8 @@ and `here for the enhancers <https://raw.githubusercontent.com/LucaCappelletti94
 | Roadmap           | K562                | `200 <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/roadmap/200/promoters/K562.csv.gz?raw=true>`__    | `1000 <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/roadmap/1000/promoters/K562.csv.gz?raw=true>`__    | `200 <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/roadmap/200/enhancers/K562.csv.gz?raw=true>`__    | `1000 <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/roadmap/1000/enhancers/K562.csv.gz?raw=true>`__    |
 +-------------------+---------------------+------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
 
+Here are the labels for all the considered cell lines.
+
 +-------------------+-------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
 |   Dataset         |   Promoters                                                                                                                                                                                                                                                     |   Enhancers                                                                                                                                                                                                                                                     |
 +===================+===============================================================================================================================+=================================================================================================================================+===============================================================================================================================+=================================================================================================================================+
@@ -69,6 +70,8 @@ and `here for the enhancers <https://raw.githubusercontent.com/LucaCappelletti94
 +-------------------+-------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
 | Roadmap           | `200 <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/roadmap/200/promoters.bed?raw=true>`__ | `1000 <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/roadmap/1000/promoters.bed?raw=true>`__ | `200 <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/roadmap/200/enhancers.bed?raw=true>`__ | `1000 <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/roadmap/1000/enhancers.bed?raw=true>`__ |
 +-------------------+-------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+
+TODO: align promoters and enhancers in a reference labels dataset.
 
 Pipeline
 ----------------------------------------------
