@@ -66,6 +66,6 @@ def load_epigenomes(
             url=label_path_placeholder.format(root=repository)+get_parameter,
             path=label_path
         )
-    return pd.read_csv(data_path), pd.read_csv(label_path, sep="\t")[[
+    return pd.read_csv(data_path, low_memory=False), pd.read_csv(label_path, sep="\t")[[
         "chrom", "chromStart", "chromEnd", "strand", cell_line.replace("-", "")
     ]]
