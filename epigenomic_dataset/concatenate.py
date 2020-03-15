@@ -50,7 +50,7 @@ def concatenate(root: str, cell_lines: List[str], workers: int):
             ]
 
             pd.concat(list(tqdm(
-                p.imap(to_dict, paths),
+                p.imap(_to_dict, paths),
                 desc="Concatenating files",
                 total=len(paths),
                 leave=False
