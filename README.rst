@@ -74,7 +74,7 @@ Here are the labels for all the considered cell lines.
 TODO: align promoters and enhancers in a reference labels dataset.
 
 The complete pipeline used to retrieve the CRR epigenomic data is available
-` here <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/run_crr_build.py>`__.
+`here <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/run_crr_build.py>`__.
 
 Pipeline for epigenomic data
 ----------------------------------------------
