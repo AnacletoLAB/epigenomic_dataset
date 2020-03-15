@@ -37,18 +37,16 @@ def get_callback(statistic: str):
         "median": np.median
     }[statistic]
 
-
-def parse_extracted_epigenome(source: str, statistics: Dict[str, bool]):
-    """Parse the given source bed-like file."""
-    root, region, filename = source.split("/")
-    target = "{root}/{region}_parsed/{filename}".format(
+def get_target_path(source:str):
+    root, filename = os.path.split(source)
+    return "{root}/parsed/{filename}".format(
         root=root,
-        region=region,
         filename=filename
     )
 
-    if os.path.exists(target):
-        return
+def parse_extracted_epigenome(source: str, statistics: Dict[str, bool]):
+    """Parse the given source bed-like file."""
+    target = get_target_path(source)
 
     header = compute_header(statistics)
     callbacks = [
@@ -98,8 +96,8 @@ def mine(root: str, statistics: Dict[str, bool]):
             "source": source,
             "statistics": statistics
         }
-        for source in glob(f"{root}/promoters/*.bed.gz") +
-        glob(f"{root}/enhancers/*.bed.gz")
+        for source in glob(f"{root}/*.bed.gz")
+        if not os.path.exists(get_target_path(source))
     ]
 
     with Pool(cpu_count()) as p:
