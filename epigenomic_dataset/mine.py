@@ -1,13 +1,14 @@
 from glob import glob
 from multiprocessing import Pool, cpu_count
 import os
-from typing import Dict
+from typing import Dict, List
 from tqdm.auto import tqdm
 import numpy as np
 import pandas as pd
 from tabulate import tabulate
 import csv
 import gzip
+from .extract import load_epigenomes_table, load_accession_path
 
 
 def compute_header(statistics: Dict[str, bool]) -> str:
@@ -30,74 +31,88 @@ def compute_header(statistics: Dict[str, bool]) -> str:
 
 def get_callback(statistic: str):
     return {
-        "mean": np.mean,
-        "var": np.mean,
-        "max": np.max,
-        "min": np.min,
-        "median": np.median
+        "mean": np.nanmean,
+        "var": np.nanmean,
+        "max": np.nanmax,
+        "min": np.nanmin,
+        "median": np.nanmedian
     }[statistic]
 
-def get_target_path(source:str):
-    root, filename = os.path.split(source)
-    return "{root}/parsed/{filename}".format(
+
+def get_target_path(root: str, cell_line: str, target: str):
+    return "{root}/{cell_line}/{target}.csv.gz".format(
         root=root,
-        filename=filename
+        cell_line=cell_line,
+        target=target
     )
 
-def parse_extracted_epigenome(source: str, statistics: Dict[str, bool]):
-    """Parse the given source bed-like file."""
-    target = get_target_path(source)
 
+def parse_extracted_epigenome(sources: str, target: str, statistics: Dict[str, bool]):
+    """Parse the given source bed-like file."""
     header = compute_header(statistics)
     callbacks = [
         get_callback(s)
         for s, enabled in statistics.items()
         if enabled
     ]
-    nans = ["nan"]*len(callbacks)
     os.makedirs(os.path.dirname(target), exist_ok=True)
-    with gzip.open(source, "rt") as s:
-        with gzip.open(target, "wt") as t:
-            # Opening file reader
-            reader = csv.reader(s, delimiter='\t')
-            # Starting by writing the head
-            t.write(header)
-            # And now we parse the lines one by one
-            for row in reader:
-                # We extract the values
-                chrom, chromStart, chromEnd, _, _, strand = row[:6]
-                # Convert the scores to float values
-                scores = np.array([
-                    float(s)
+
+    source_files = [
+        gzip.open(source, "rt")
+        for source in sources
+    ]
+
+    readers = [
+        csv.reader(source_file, delimiter='\t')
+        for source_file in source_files
+    ]
+
+    with gzip.open(target, "wt") as t:
+        # Starting by writing the head
+        t.write(header)
+        # And now we parse the lines one by one
+        for rows in zip(*readers):
+            # We extract the values
+            chrom, chromStart, chromEnd, _, _, strand = rows[0][:6]
+            # Convert the scores to float values
+            scores = np.mean([
+                [
+                    float(s) if s != "NA" else np.nan
                     for s in row[7:]
-                    if s != "NA"
-                ])
-                if scores.size != 0:
-                    metrics = [
-                        cal(scores).astype(str)
-                        for cal in callbacks
-                    ]
-                else:
-                    metrics = nans
-                # And write the results
-                t.write("\t".join([
-                    chrom, chromStart, chromEnd, strand,
-                    *metrics
-                ])+'\n')
+                ]
+                for row in rows
+            ], axis=1)
+            print(scores.shape)
+            metrics = [
+                cal(scores).astype(str)
+                for cal in callbacks
+            ]
+            # And write the results
+            t.write("\t".join([
+                chrom, chromStart, chromEnd, strand,
+                *metrics
+            ])+'\n')
+
+    for source_file in source_files:
+        source_file.close()
 
 
 def _parse_extracted_epigenome(kwargs: Dict):
     return parse_extracted_epigenome(**kwargs)
 
 
-def mine(root: str, statistics: Dict[str, bool]):
+def mine(root: str, statistics: Dict[str, bool], cell_lines: List[str]):
     tasks = [
         {
-            "source": source,
+            "sources": [
+                load_accession_path(root, accession)
+                for accession in group.accession
+            ],
+            "target": get_target_path(root, cell_line, target),
             "statistics": statistics
         }
-        for source in glob(f"{root}/*.bed.gz")
-        if not os.path.exists(get_target_path(source))
+        for (cell_line, target), group in load_epigenomes_table(cell_lines).groupby(["cell_line", "target"])
+        if not os.path.exists(get_target_path(root, cell_line, target))
     ]
 
     with Pool(cpu_count()) as p:

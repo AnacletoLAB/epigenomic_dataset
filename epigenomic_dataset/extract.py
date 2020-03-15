@@ -35,6 +35,22 @@ def _extraction_job(kwargs):
     return extraction_job(**kwargs)
 
 
+def load_epigenomes_table(cell_lines: List[str]):
+    # Loading the epigenomes metadata
+    epigenomes = pd.read_csv(
+        "{}/epigenomes.csv".format(os.path.dirname(os.path.abspath(__file__)))
+    )
+    # Filtering epigenomes for required cell lines
+    return epigenomes[epigenomes.cell_line.isin(cell_lines)]
+
+
+def load_accession_path(target: str, accession: str) -> str:
+    return "{root}/{accession}.bed.gz".format(
+        target_path=target,
+        accession=accession
+    )
+
+
 def build_extraction_tasks(
     bed_path: str,
     cell_lines: List[str],
@@ -63,11 +79,7 @@ def build_extraction_tasks(
     Returns list of tasks to be executed.
     """
     # Loading the epigenomes metadata
-    epigenomes = pd.read_csv(
-        "{}/epigenomes.csv".format(os.path.dirname(os.path.abspath(__file__)))
-    )
-    # Filtering epigenomes for required cell lines
-    epigenomes = epigenomes[epigenomes.cell_line.isin(cell_lines)]
+    epigenomes = load_epigenomes_table(cell_lines)
     # Build the tasks
     return [
         {
@@ -78,10 +90,7 @@ def build_extraction_tasks(
                 **epigenome.to_dict()
             ),
             # Where to store the extracted regions
-            "target_path": "{target_path}/{accession}.bed.gz".format(
-                target_path=target_path,
-                **epigenome.to_dict()
-            ),
+            "target_path": load_accession_path(target_path, epigenome.accession),
             "url": epigenome.url,
             "clear_download": clear_download
         }
