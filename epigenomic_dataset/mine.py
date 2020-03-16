@@ -81,8 +81,7 @@ def parse_extracted_epigenome(sources: str, target: str, statistics: Dict[str, b
                     for s in row[7:]
                 ]
                 for row in rows
-            ], axis=1)
-            print(scores.shape)
+            ], axis=0)
             metrics = [
                 cal(scores).astype(str)
                 for cal in callbacks
