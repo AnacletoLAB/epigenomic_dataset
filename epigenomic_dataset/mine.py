@@ -75,7 +75,7 @@ def parse_extracted_epigenome(sources: str, target: str, statistics: Dict[str, b
             # We extract the values
             chrom, chromStart, chromEnd, _, _, strand = rows[0][:6]
             # Convert the scores to float values
-            scores = np.mean([
+            scores = np.nanmean([
                 [
                     float(s) if s != "NA" else np.nan
                     for s in row[7:]
