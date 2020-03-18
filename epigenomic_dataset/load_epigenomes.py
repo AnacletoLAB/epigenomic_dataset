@@ -68,8 +68,10 @@ def load_epigenomes(
         )
 
     dtypes = {
+        "chrom":"str",
         "chromStart":"int",
-        "chromEnd":"int"
+        "chromEnd":"int",
+        "strand":"str"
     }
 
     return pd.read_csv(
