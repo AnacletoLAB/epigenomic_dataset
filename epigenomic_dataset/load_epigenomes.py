@@ -48,7 +48,7 @@ def load_epigenomes(
         cell_line=cell_line
     )
     data_path = data_path_placeholder.format(root=root)
-    label_path_placeholder = "{{root}}/{dataset}/{window_size}/{regions}.bed".format(
+    label_path_placeholder = "{{root}}/{dataset}/{window_size}/{regions}.bed.gz".format(
         root=root,
         dataset=dataset,
         window_size=window_size,
