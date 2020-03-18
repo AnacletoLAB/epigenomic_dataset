@@ -74,12 +74,18 @@ def load_epigenomes(
         "strand":"str"
     }
 
-    return pd.read_csv(
-        data_path,
-        index_col=[0,1,2,3],
-        header=[0, 1],
-        low_memory=False,
-        dtype=dtypes
-    ), pd.read_csv(label_path, sep="\t", index_col=[0,1,2,3], dtype=dtypes)[[
-        "chrom", "chromStart", "chromEnd", "strand", cell_line.replace("-", "")
-    ]]
+    return (
+        pd.read_csv(
+            data_path,
+            index_col=[0,1,2,3],
+            header=[0, 1],
+            low_memory=False,
+            dtype=dtypes
+        ),
+        pd.read_csv(
+            label_path,
+            sep="\t",
+            index_col=[0,1,2,3],
+            dtype=dtypes
+        )
+    )
