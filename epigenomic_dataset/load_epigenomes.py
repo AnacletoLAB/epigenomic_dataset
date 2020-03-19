@@ -74,22 +74,26 @@ def load_epigenomes(
         "strand":"str"
     }
 
-    index_column = list(dtypes.keys())
-
     X = pd.read_csv(
         data_path,
+        index_col=[0,1,2,3],
         header=[0, 1],
         low_memory=False,
         dtype=dtypes
     )
+    
+    X.index.rename(
+        list(dtypes.keys()),
+        inplace=True
+    )
+
     y = pd.read_csv(
         label_path,
+        index_col=[0,1,2,3],
         sep="\t",
         dtype=dtypes
     )
-
-    X = X.set_index(index_column)
-    y = y.set_index(index_column)
+    
 
     y = y[[cell_line]]
 
