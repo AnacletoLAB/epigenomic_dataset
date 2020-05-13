@@ -9,10 +9,11 @@ def load_epigenomes(
     dataset: str = "fantom",
     regions: str = "promoters",
     window_size: int = 200,
-    root: str = "datasets"
+    root: str = "datasets",
+    drop_unique_group_by: bool = True
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Return epigenomic data and labels for given parameters.
-    
+
     Parameters
     ----------------------------------------
     cell_line: str = "K562",
@@ -33,6 +34,10 @@ def load_epigenomes(
         listed in the repository README file.
     root: str = "datasets"
         Where to store the downloaded data.
+    drop_unique_group_by: bool = True,
+        Whetever to drop the group by column layer
+        when it is unique, eg when only a max group by
+        is available in the dataset.
 
     Returns
     ----------------------------------------
@@ -68,33 +73,37 @@ def load_epigenomes(
         )
 
     dtypes = {
-        "chrom":"str",
-        "chromStart":"int",
-        "chromEnd":"int",
-        "strand":"str"
+        "chrom": "str",
+        "chromStart": "int",
+        "chromEnd": "int",
+        "strand": "str"
     }
 
     X = pd.read_csv(
         data_path,
-        index_col=[0,1,2,3],
+        index_col=[0, 1, 2, 3],
         header=[0, 1],
         low_memory=False,
         dtype=dtypes
     )
-    
+
     X.index.rename(
         list(dtypes.keys()),
         inplace=True
     )
 
+    X.columns.names = (None,)*len(X.columns.names)
+
+    if X.columns.levels[1].size == 1 and drop_unique_group_by:
+        X = X.droplevel(1, axis=1)
+
     y = pd.read_csv(
         label_path,
-        index_col=[0,1,2,3],
+        index_col=[0, 1, 2, 3],
         sep="\t",
         dtype=dtypes
-    )
-    
+    ).astype(int)
 
-    y = y[[cell_line]]
+    y = y[[cell_line.upper()]]
 
     return X, y
