@@ -63,8 +63,7 @@ setup(
         "encodeproject>=1.0.9",
         "pybwtool>=1.0.8",
         "crr_labels>=1.0.7",
-        "notipy_me>=1.3.11",
-        "numba>=0.50"
+        "notipy_me>=1.3.11"
     ],
     extras_require=extras,
 )
