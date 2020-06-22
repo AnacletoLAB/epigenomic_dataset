@@ -104,6 +104,6 @@ def load_epigenomes(
         dtype=dtypes
     ).astype(int)
 
-    y = y[[cell_line.upper()]]
+    y = y[[cell_line.replace("-", "").upper()]]
 
     return X, y
