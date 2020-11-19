@@ -1,0 +1,1945 @@
+{
+    "@context": "/terms/",
+    "@graph": [
+        {
+            "@id": "/experiments/ENCSR786DCL/",
+            "@type": [
+                "Experiment",
+                "Dataset",
+                "Item"
+            ],
+            "accession": "ENCSR786DCL",
+            "assay_term_name": "whole-genome shotgun bisulfite sequencing",
+            "assay_title": "WGBS",
+            "award": {
+                "project": "ENCODE"
+            },
+            "biosample_ontology": {
+                "term_name": "HepG2"
+            },
+            "biosample_summary": "HepG2",
+            "dbxrefs": [
+                "GEO:GSE127318"
+            ],
+            "files": [
+                {
+                    "@id": "/files/ENCFF717MDZ/"
+                },
+                {
+                    "@id": "/files/ENCFF211RZY/"
+                },
+                {
+                    "@id": "/files/ENCFF563QAT/"
+                },
+                {
+                    "@id": "/files/ENCFF954LFD/"
+                },
+                {
+                    "@id": "/files/ENCFF008SVZ/"
+                },
+                {
+                    "@id": "/files/ENCFF169FLJ/"
+                },
+                {
+                    "@id": "/files/ENCFF295JIY/"
+                },
+                {
+                    "@id": "/files/ENCFF910TUY/"
+                },
+                {
+                    "@id": "/files/ENCFF400QTE/"
+                },
+                {
+                    "@id": "/files/ENCFF613LZQ/"
+                },
+                {
+                    "@id": "/files/ENCFF337LCG/"
+                },
+                {
+                    "@id": "/files/ENCFF048EET/"
+                },
+                {
+                    "@id": "/files/ENCFF064GJQ/"
+                },
+                {
+                    "@id": "/files/ENCFF372MKR/"
+                },
+                {
+                    "@id": "/files/ENCFF583VWF/"
+                },
+                {
+                    "@id": "/files/ENCFF857DKQ/"
+                },
+                {
+                    "@id": "/files/ENCFF851HYC/"
+                },
+                {
+                    "@id": "/files/ENCFF369YQW/"
+                },
+                {
+                    "@id": "/files/ENCFF850OWE/"
+                },
+                {
+                    "@id": "/files/ENCFF550ZFZ/"
+                }
+            ],
+            "lab": {
+                "title": "Richard Myers, HAIB"
+            },
+            "related_series": [],
+            "replicates": [
+                {
+                    "library": {
+                        "biosample": {
+                            "organism": {
+                                "scientific_name": "Homo sapiens"
+                            },
+                            "age_display": "15 years",
+                            "life_stage": "child",
+                            "accession": "ENCBS773GMP"
+                        }
+                    },
+                    "@id": "/replicates/3285d22d-8b22-4613-a8c8-58ee77c92e2b/",
+                    "technical_replicate_number": 1,
+                    "biological_replicate_number": 2
+                },
+                {
+                    "library": {
+                        "biosample": {
+                            "organism": {
+                                "scientific_name": "Homo sapiens"
+                            },
+                            "age_display": "15 years",
+                            "life_stage": "child",
+                            "accession": "ENCBS333JNJ"
+                        }
+                    },
+                    "@id": "/replicates/1c8c62f4-36be-4bef-8e37-3cf889cd8e84/",
+                    "technical_replicate_number": 1,
+                    "biological_replicate_number": 1
+                }
+            ],
+            "status": "released"
+        },
+        {
+            "@id": "/experiments/ENCSR481JIW/",
+            "@type": [
+                "Experiment",
+                "Dataset",
+                "Item"
+            ],
+            "accession": "ENCSR481JIW",
+            "assay_term_name": "whole-genome shotgun bisulfite sequencing",
+            "assay_title": "WGBS",
+            "award": {
+                "project": "ENCODE"
+            },
+            "biosample_ontology": {
+                "term_name": "A549"
+            },
+            "biosample_summary": "A549",
+            "dbxrefs": [
+                "GEO:GSE127301"
+            ],
+            "description": "WGBS sequencing from the A549 cell line",
+            "files": [
+                {
+                    "@id": "/files/ENCFF327QCK/"
+                },
+                {
+                    "@id": "/files/ENCFF986UWM/"
+                },
+                {
+                    "@id": "/files/ENCFF565VHN/"
+                },
+                {
+                    "@id": "/files/ENCFF251FLW/"
+                },
+                {
+                    "@id": "/files/ENCFF304DGQ/"
+                },
+                {
+                    "@id": "/files/ENCFF885KWQ/"
+                },
+                {
+                    "@id": "/files/ENCFF928SMD/"
+                },
+                {
+                    "@id": "/files/ENCFF527HXB/"
+                },
+                {
+                    "@id": "/files/ENCFF830XCI/"
+                },
+                {
+                    "@id": "/files/ENCFF188EKT/"
+                },
+                {
+                    "@id": "/files/ENCFF587YTJ/"
+                },
+                {
+                    "@id": "/files/ENCFF814ZGB/"
+                },
+                {
+                    "@id": "/files/ENCFF005TID/"
+                },
+                {
+                    "@id": "/files/ENCFF949EIN/"
+                },
+                {
+                    "@id": "/files/ENCFF785LYM/"
+                },
+                {
+                    "@id": "/files/ENCFF401QUB/"
+                },
+                {
+                    "@id": "/files/ENCFF704XNF/"
+                },
+                {
+                    "@id": "/files/ENCFF003JVR/"
+                },
+                {
+                    "@id": "/files/ENCFF205ZCQ/"
+                },
+                {
+                    "@id": "/files/ENCFF283FAU/"
+                }
+            ],
+            "lab": {
+                "title": "Richard Myers, HAIB"
+            },
+            "related_series": [
+                {
+                    "dbxrefs": [
+                        "IHEC:IHECRE00004694"
+                    ],
+                    "original_files": [],
+                    "aliases": [],
+                    "references": [],
+                    "documents": [],
+                    "@type": [
+                        "ReferenceEpigenome",
+                        "Series",
+                        "Dataset",
+                        "Item"
+                    ],
+                    "description": "Reference epigenome for human A549 cell line",
+                    "accession": "ENCSR809EFN",
+                    "lab": "/labs/encode-consortium/",
+                    "uuid": "1addacc2-a947-4d87-b3b8-4d2506b0ac3d",
+                    "superseded_by": [],
+                    "date_released": "2018-07-13",
+                    "supersedes": [],
+                    "schema_version": "17",
+                    "award": "/awards/U41HG006992/",
+                    "alternate_accessions": [],
+                    "assay_term_id": [
+                        "OBI:0001863",
+                        "OBI:0002571",
+                        "OBI:0001853",
+                        "OBI:0002112",
+                        "OBI:0000716",
+                        "OBI:0002039"
+                    ],
+                    "assembly": [
+                        "hg19",
+                        "GRCh38"
+                    ],
+                    "@id": "/reference-epigenomes/ENCSR809EFN/",
+                    "control_type": [
+                        "input library"
+                    ],
+                    "organism": [
+                        "/organisms/human/"
+                    ],
+                    "date_created": "2015-12-14T17:41:18.422454+00:00",
+                    "submitted_by": "/users/85978cd9-131e-48e2-a389-f752ab05b0a6/",
+                    "assay_synonyms": [
+                        "ChIP-seq assay",
+                        "Shotgun bisulfite sequencing",
+                        "short RNA-seq",
+                        "small RNA-seq",
+                        "polyA-selected RNA sequencing assay",
+                        "small RNA sequencing assay",
+                        "ATAC-seq",
+                        "shotgun bisulfite-seq assay",
+                        "mRNA-seq",
+                        "whole genome bisulfite sequencing",
+                        "WGBS",
+                        "whole-genome shotgun bisulfite sequencing",
+                        "WGSBS",
+                        "DNase I hypersensitive sites sequencing assay",
+                        "ATAC-seq assay",
+                        "chromatin immunoprecipitation sequencing assay",
+                        "assay for transposase-accessible chromatin using sequencing"
+                    ],
+                    "revoked_files": [],
+                    "revoked_datasets": [],
+                    "target": [
+                        "/targets/H3K4me3-human/",
+                        "/targets/POLR2A-human/",
+                        "/targets/CTCF-human/"
+                    ],
+                    "assay_term_name": [
+                        "ChIP-seq",
+                        "small RNA-seq",
+                        "ATAC-seq",
+                        "DNase-seq",
+                        "whole-genome shotgun bisulfite sequencing",
+                        "polyA plus RNA-seq"
+                    ],
+                    "treatment_term_name": [],
+                    "related_datasets": [
+                        "/experiments/ENCSR000CON/",
+                        "/experiments/ENCSR000CSL/",
+                        "/experiments/ENCSR000DMZ/",
+                        "/experiments/ENCSR000DNA/",
+                        "/experiments/ENCSR000DNB/",
+                        "/experiments/ENCSR000DPD/",
+                        "/experiments/ENCSR000DPE/",
+                        "/experiments/ENCSR000ELW/",
+                        "/experiments/ENCSR032RGS/",
+                        "/experiments/ENCSR481JIW/"
+                    ],
+                    "hub": "/reference-epigenomes/ENCSR809EFN/@@hub/hub.txt",
+                    "biosample_ontology": [
+                        "/biosample-types/cell_line_EFO_0001086/"
+                    ],
+                    "contributing_files": [],
+                    "files": [],
+                    "internal_tags": [],
+                    "status": "released"
+                }
+            ],
+            "replicates": [
+                {
+                    "library": {
+                        "biosample": {
+                            "organism": {
+                                "scientific_name": "Homo sapiens"
+                            },
+                            "age_display": "58 years",
+                            "life_stage": "adult",
+                            "accession": "ENCBS974OAE"
+                        }
+                    },
+                    "@id": "/replicates/5e3a3fd3-aef0-48de-8fb6-56aa6b268889/",
+                    "technical_replicate_number": 1,
+                    "biological_replicate_number": 1
+                },
+                {
+                    "library": {
+                        "biosample": {
+                            "organism": {
+                                "scientific_name": "Homo sapiens"
+                            },
+                            "age_display": "58 years",
+                            "life_stage": "adult",
+                            "accession": "ENCBS766MZP"
+                        }
+                    },
+                    "@id": "/replicates/6b7735e2-8edf-49f0-b3f2-281a46c38738/",
+                    "technical_replicate_number": 1,
+                    "biological_replicate_number": 2
+                }
+            ],
+            "status": "released"
+        },
+        {
+            "@id": "/experiments/ENCSR890UQO/",
+            "@type": [
+                "Experiment",
+                "Dataset",
+                "Item"
+            ],
+            "accession": "ENCSR890UQO",
+            "assay_term_name": "whole-genome shotgun bisulfite sequencing",
+            "assay_title": "WGBS",
+            "audit": {
+                "INTERNAL_ACTION": [
+                    {
+                        "path": "/files/ENCFF798RSS/",
+                        "level_name": "INTERNAL_ACTION",
+                        "level": 30,
+                        "name": "audit_item_status",
+                        "detail": "Released file {ENCFF798RSS|/files/ENCFF798RSS/} has replaced subobject file {7dad6a05-ba04-4e8b-8149-9b6b3dbac2b7|/files/7dad6a05-ba04-4e8b-8149-9b6b3dbac2b7/}",
+                        "category": "mismatched status"
+                    }
+                ]
+            },
+            "award": {
+                "project": "ENCODE"
+            },
+            "biosample_ontology": {
+                "term_name": "GM12878"
+            },
+            "biosample_summary": "GM12878",
+            "dbxrefs": [
+                "GEO:GSE86765"
+            ],
+            "description": "HAIB Whole Genome Bisulfite Sequencing GM12878",
+            "files": [
+                {
+                    "@id": "/files/ENCFF585BXF/"
+                },
+                {
+                    "@id": "/files/ENCFF851HAT/"
+                },
+                {
+                    "@id": "/files/ENCFF113KRQ/"
+                },
+                {
+                    "@id": "/files/ENCFF798RSS/"
+                },
+                {
+                    "@id": "/files/ENCFF681ASN/"
+                },
+                {
+                    "@id": "/files/ENCFF721BJM/"
+                },
+                {
+                    "@id": "/files/ENCFF279HCL/"
+                },
+                {
+                    "@id": "/files/ENCFF349NNL/"
+                },
+                {
+                    "@id": "/files/ENCFF160SAO/"
+                },
+                {
+                    "@id": "/files/ENCFF003FWN/"
+                },
+                {
+                    "@id": "/files/ENCFF796NFQ/"
+                },
+                {
+                    "@id": "/files/ENCFF448RTC/"
+                },
+                {
+                    "@id": "/files/ENCFF060WGP/"
+                },
+                {
+                    "@id": "/files/ENCFF422JIU/"
+                },
+                {
+                    "@id": "/files/ENCFF812CHG/"
+                },
+                {
+                    "@id": "/files/ENCFF564LQL/"
+                },
+                {
+                    "@id": "/files/ENCFF835NTC/"
+                },
+                {
+                    "@id": "/files/ENCFF774BBB/"
+                },
+                {
+                    "@id": "/files/ENCFF067JYV/"
+                },
+                {
+                    "@id": "/files/ENCFF038HXQ/"
+                }
+            ],
+            "lab": {
+                "title": "Richard Myers, HAIB"
+            },
+            "related_series": [
+                {
+                    "dbxrefs": [
+                        "IHEC:IHECRE00001892"
+                    ],
+                    "original_files": [],
+                    "aliases": [],
+                    "references": [],
+                    "documents": [],
+                    "@type": [
+                        "ReferenceEpigenome",
+                        "Series",
+                        "Dataset",
+                        "Item"
+                    ],
+                    "description": "Reference epigenome for human GM12878 cell line",
+                    "accession": "ENCSR447YYN",
+                    "lab": "/labs/encode-consortium/",
+                    "uuid": "4edc84ba-4d25-4de6-a734-640d7f083f79",
+                    "superseded_by": [],
+                    "date_released": "2016-08-19",
+                    "supersedes": [
+                        "/reference-epigenomes/ENCSR977QPF/"
+                    ],
+                    "schema_version": "17",
+                    "award": "/awards/U41HG006992/",
+                    "alternate_accessions": [],
+                    "assay_term_id": [
+                        "OBI:0001863",
+                        "OBI:0002571",
+                        "OBI:0001922",
+                        "OBI:0001853",
+                        "OBI:0002112",
+                        "OBI:0001271",
+                        "OBI:0000716",
+                        "OBI:0002039"
+                    ],
+                    "assembly": [
+                        "hg19",
+                        "GRCh38"
+                    ],
+                    "@id": "/reference-epigenomes/ENCSR447YYN/",
+                    "control_type": [
+                        "input library",
+                        "IgG"
+                    ],
+                    "organism": [
+                        "/organisms/human/"
+                    ],
+                    "date_created": "2015-12-14T20:47:41.208580+00:00",
+                    "submitted_by": "/users/85978cd9-131e-48e2-a389-f752ab05b0a6/",
+                    "assay_synonyms": [
+                        "Shotgun bisulfite sequencing",
+                        "polyA-selected RNA sequencing assay",
+                        "WGSBS",
+                        "chromatin immunoprecipitation sequencing assay",
+                        "assay for transposase-accessible chromatin using sequencing",
+                        "short RNA-seq",
+                        "small RNA-seq",
+                        "ATAC-seq",
+                        "WGBS",
+                        "miRNA-seq",
+                        "DNase I hypersensitive sites sequencing assay",
+                        "miRNA-HTS",
+                        "small RNA sequencing assay",
+                        "microRNA profiling by high throughput sequencing assay",
+                        "transcription profiling by high throughput sequencing",
+                        "whole genome bisulfite sequencing",
+                        "microRNA-seq",
+                        "whole-genome shotgun bisulfite sequencing",
+                        "ATAC-seq assay",
+                        "ChIP-seq assay",
+                        "RNA-seq assay",
+                        "shotgun bisulfite-seq assay",
+                        "mRNA-seq",
+                        "microRNA-seq assay"
+                    ],
+                    "revoked_files": [],
+                    "revoked_datasets": [],
+                    "target": [
+                        "/targets/H3K27ac-human/",
+                        "/targets/H3K9me3-human/",
+                        "/targets/POLR2AphosphoS5-human/",
+                        "/targets/H3K4me1-human/",
+                        "/targets/H3K4me3-human/",
+                        "/targets/POLR2A-human/",
+                        "/targets/H3K36me3-human/",
+                        "/targets/H3K27me3-human/",
+                        "/targets/CTCF-human/",
+                        "/targets/EP300-human/"
+                    ],
+                    "assay_term_name": [
+                        "ChIP-seq",
+                        "RNA-seq",
+                        "small RNA-seq",
+                        "ATAC-seq",
+                        "DNase-seq",
+                        "microRNA-seq",
+                        "whole-genome shotgun bisulfite sequencing",
+                        "polyA plus RNA-seq"
+                    ],
+                    "treatment_term_name": [],
+                    "related_datasets": [
+                        "/experiments/ENCSR000AED/",
+                        "/experiments/ENCSR000AKC/",
+                        "/experiments/ENCSR000AKD/",
+                        "/experiments/ENCSR000AKF/",
+                        "/experiments/ENCSR000AKJ/",
+                        "/experiments/ENCSR000AOX/",
+                        "/experiments/ENCSR000BGD/",
+                        "/experiments/ENCSR000BGH/",
+                        "/experiments/ENCSR000BGJ/",
+                        "/experiments/ENCSR000BIF/",
+                        "/experiments/ENCSR000DRV/",
+                        "/experiments/ENCSR000DRW/",
+                        "/experiments/ENCSR000DZD/",
+                        "/experiments/ENCSR000DZN/",
+                        "/experiments/ENCSR000EAF/",
+                        "/experiments/ENCSR000EMT/",
+                        "/experiments/ENCSR000EYX/",
+                        "/experiments/ENCSR057BWO/",
+                        "/experiments/ENCSR142REC/",
+                        "/experiments/ENCSR770HBF/",
+                        "/experiments/ENCSR890UQO/",
+                        "/experiments/ENCSR000AEJ/",
+                        "/experiments/ENCSR000AEE/",
+                        "/experiments/ENCSR637XSC/"
+                    ],
+                    "hub": "/reference-epigenomes/ENCSR447YYN/@@hub/hub.txt",
+                    "biosample_ontology": [
+                        "/biosample-types/cell_line_EFO_0002784/"
+                    ],
+                    "contributing_files": [],
+                    "files": [],
+                    "internal_tags": [],
+                    "status": "released"
+                }
+            ],
+            "replicates": [
+                {
+                    "library": {
+                        "biosample": {
+                            "organism": {
+                                "scientific_name": "Homo sapiens"
+                            },
+                            "life_stage": "adult",
+                            "accession": "ENCBS232JAP"
+                        }
+                    },
+                    "@id": "/replicates/5d359f23-7a99-4193-8985-72b11414c314/",
+                    "technical_replicate_number": 1,
+                    "biological_replicate_number": 2
+                },
+                {
+                    "library": {
+                        "biosample": {
+                            "organism": {
+                                "scientific_name": "Homo sapiens"
+                            },
+                            "life_stage": "adult",
+                            "accession": "ENCBS057BBL"
+                        }
+                    },
+                    "@id": "/replicates/d8610234-4a95-410d-8f27-d3576af15390/",
+                    "technical_replicate_number": 1,
+                    "biological_replicate_number": 1
+                }
+            ],
+            "status": "released"
+        },
+        {
+            "@id": "/experiments/ENCSR881XOU/",
+            "@type": [
+                "Experiment",
+                "Dataset",
+                "Item"
+            ],
+            "accession": "ENCSR881XOU",
+            "assay_term_name": "whole-genome shotgun bisulfite sequencing",
+            "assay_title": "WGBS",
+            "award": {
+                "project": "ENCODE"
+            },
+            "biosample_ontology": {
+                "term_name": "HepG2"
+            },
+            "biosample_summary": "HepG2",
+            "dbxrefs": [
+                "GEO:GSE86764"
+            ],
+            "description": "HAIB Whole Genome Bisulfite Sequencing HepG2",
+            "files": [
+                {
+                    "@id": "/files/ENCFF406GDR/"
+                },
+                {
+                    "@id": "/files/ENCFF508BUS/"
+                },
+                {
+                    "@id": "/files/ENCFF220NMH/"
+                },
+                {
+                    "@id": "/files/ENCFF706BRZ/"
+                },
+                {
+                    "@id": "/files/ENCFF957OIM/"
+                },
+                {
+                    "@id": "/files/ENCFF073DUG/"
+                },
+                {
+                    "@id": "/files/ENCFF170YSW/"
+                },
+                {
+                    "@id": "/files/ENCFF716NKX/"
+                },
+                {
+                    "@id": "/files/ENCFF454TOK/"
+                },
+                {
+                    "@id": "/files/ENCFF624VFJ/"
+                },
+                {
+                    "@id": "/files/ENCFF572KNK/"
+                },
+                {
+                    "@id": "/files/ENCFF300GSM/"
+                },
+                {
+                    "@id": "/files/ENCFF840BYO/"
+                },
+                {
+                    "@id": "/files/ENCFF847OWL/"
+                },
+                {
+                    "@id": "/files/ENCFF086KJC/"
+                },
+                {
+                    "@id": "/files/ENCFF376QAJ/"
+                },
+                {
+                    "@id": "/files/ENCFF509PJE/"
+                },
+                {
+                    "@id": "/files/ENCFF017UCM/"
+                },
+                {
+                    "@id": "/files/ENCFF390OZB/"
+                },
+                {
+                    "@id": "/files/ENCFF030LDK/"
+                }
+            ],
+            "lab": {
+                "title": "Richard Myers, HAIB"
+            },
+            "related_series": [
+                {
+                    "dbxrefs": [
+                        "IHEC:IHECRE00001893"
+                    ],
+                    "original_files": [],
+                    "aliases": [],
+                    "references": [],
+                    "documents": [],
+                    "@type": [
+                        "ReferenceEpigenome",
+                        "Series",
+                        "Dataset",
+                        "Item"
+                    ],
+                    "description": "Reference epigenome for human HepG2 cell line",
+                    "accession": "ENCSR888GEN",
+                    "lab": "/labs/encode-consortium/",
+                    "uuid": "ad2d2271-5546-4c6d-94f6-55fbc591ac74",
+                    "superseded_by": [],
+                    "date_released": "2016-08-19",
+                    "supersedes": [
+                        "/reference-epigenomes/ENCSR134DWG/"
+                    ],
+                    "schema_version": "17",
+                    "award": "/awards/U41HG006992/",
+                    "alternate_accessions": [],
+                    "assay_term_id": [
+                        "OBI:0001863",
+                        "OBI:0002039",
+                        "OBI:0002112",
+                        "OBI:0002571",
+                        "OBI:0001853",
+                        "OBI:0001271",
+                        "OBI:0000716",
+                        "OBI:0001922"
+                    ],
+                    "assembly": [
+                        "hg19",
+                        "GRCh38"
+                    ],
+                    "@id": "/reference-epigenomes/ENCSR888GEN/",
+                    "control_type": [
+                        "input library",
+                        "wild type",
+                        "IgG"
+                    ],
+                    "organism": [
+                        "/organisms/human/"
+                    ],
+                    "date_created": "2015-12-14T22:02:56.665767+00:00",
+                    "submitted_by": "/users/85978cd9-131e-48e2-a389-f752ab05b0a6/",
+                    "assay_synonyms": [
+                        "whole genome bisulfite sequencing",
+                        "mRNA-seq",
+                        "small RNA-seq",
+                        "shotgun bisulfite-seq assay",
+                        "small RNA sequencing assay",
+                        "assay for transposase-accessible chromatin using sequencing",
+                        "chromatin immunoprecipitation sequencing assay",
+                        "WGBS",
+                        "Shotgun bisulfite sequencing",
+                        "microRNA profiling by high throughput sequencing assay",
+                        "ATAC-seq assay",
+                        "transcription profiling by high throughput sequencing",
+                        "miRNA-HTS",
+                        "RNA-seq assay",
+                        "microRNA-seq",
+                        "whole-genome shotgun bisulfite sequencing",
+                        "short RNA-seq",
+                        "polyA-selected RNA sequencing assay",
+                        "miRNA-seq",
+                        "ChIP-seq assay",
+                        "WGSBS",
+                        "ATAC-seq",
+                        "DNase I hypersensitive sites sequencing assay",
+                        "microRNA-seq assay"
+                    ],
+                    "revoked_files": [],
+                    "revoked_datasets": [],
+                    "target": [
+                        "/targets/H3K4me1-human/",
+                        "/targets/EP300-human/",
+                        "/targets/CTCF-human/",
+                        "/targets/H3K27ac-human/",
+                        "/targets/H3K4me3-human/",
+                        "/targets/POLR2AphosphoS5-human/",
+                        "/targets/POLR2A-human/",
+                        "/targets/H3K9me3-human/",
+                        "/targets/H3K36me3-human/",
+                        "/targets/H3K27me3-human/"
+                    ],
+                    "assay_term_name": [
+                        "ChIP-seq",
+                        "DNase-seq",
+                        "small RNA-seq",
+                        "polyA plus RNA-seq",
+                        "RNA-seq",
+                        "microRNA-seq",
+                        "whole-genome shotgun bisulfite sequencing",
+                        "ATAC-seq"
+                    ],
+                    "treatment_term_name": [],
+                    "related_datasets": [
+                        "/experiments/ENCSR000AMB/",
+                        "/experiments/ENCSR000AMO/",
+                        "/experiments/ENCSR000AOL/",
+                        "/experiments/ENCSR000APV/",
+                        "/experiments/ENCSR000ATD/",
+                        "/experiments/ENCSR000BLG/",
+                        "/experiments/ENCSR000BPI/",
+                        "/experiments/ENCSR000CRX/",
+                        "/experiments/ENCSR000EEM/",
+                        "/experiments/ENCSR000EEN/",
+                        "/experiments/ENCSR055XHN/",
+                        "/experiments/ENCSR149XIL/",
+                        "/experiments/ENCSR181ZGR/",
+                        "/experiments/ENCSR239QGH/",
+                        "/experiments/ENCSR271XMW/",
+                        "/experiments/ENCSR291GJU/",
+                        "/experiments/ENCSR575RRX/",
+                        "/experiments/ENCSR607XFI/",
+                        "/experiments/ENCSR693GOR/",
+                        "/experiments/ENCSR730NEO/",
+                        "/experiments/ENCSR881XOU/",
+                        "/experiments/ENCSR985KAT/"
+                    ],
+                    "hub": "/reference-epigenomes/ENCSR888GEN/@@hub/hub.txt",
+                    "biosample_ontology": [
+                        "/biosample-types/cell_line_EFO_0001187/"
+                    ],
+                    "contributing_files": [],
+                    "files": [],
+                    "internal_tags": [],
+                    "status": "released"
+                }
+            ],
+            "replicates": [
+                {
+                    "library": {
+                        "biosample": {
+                            "organism": {
+                                "scientific_name": "Homo sapiens"
+                            },
+                            "age_display": "15 years",
+                            "life_stage": "child",
+                            "accession": "ENCBS612GBT"
+                        }
+                    },
+                    "@id": "/replicates/b2847a2f-dd77-4a19-adec-336b018f5c91/",
+                    "technical_replicate_number": 1,
+                    "biological_replicate_number": 2
+                },
+                {
+                    "library": {
+                        "biosample": {
+                            "organism": {
+                                "scientific_name": "Homo sapiens"
+                            },
+                            "age_display": "15 years",
+                            "life_stage": "child",
+                            "accession": "ENCBS778JAH"
+                        }
+                    },
+                    "@id": "/replicates/b786a40d-fb11-4219-a95c-ed2f1a9b2b8d/",
+                    "technical_replicate_number": 1,
+                    "biological_replicate_number": 1
+                }
+            ],
+            "status": "released"
+        },
+        {
+            "@id": "/experiments/ENCSR765JPC/",
+            "@type": [
+                "Experiment",
+                "Dataset",
+                "Item"
+            ],
+            "accession": "ENCSR765JPC",
+            "assay_term_name": "whole-genome shotgun bisulfite sequencing",
+            "assay_title": "WGBS",
+            "audit": {
+                "WARNING": [
+                    {
+                        "path": "/experiments/ENCSR765JPC/",
+                        "level_name": "WARNING",
+                        "level": 40,
+                        "name": "audit_experiment",
+                        "detail": "Biological replicate 1 in experiment {ENCSR765JPC|/experiments/ENCSR765JPC/} has sequencing read lengths [100]  that differ from replicate 2, which has [125] sequencing read lengths.",
+                        "category": "mixed read lengths"
+                    },
+                    {
+                        "path": "/experiments/ENCSR765JPC/",
+                        "level_name": "WARNING",
+                        "level": 40,
+                        "name": "audit_experiment",
+                        "detail": "Replicate of experiment processed by WGBS paired-end pipeline ( {ENCPL985BLO|/pipelines/ENCPL985BLO/} ) has a coverage of 26X. The minimum ENCODE standard coverage for each replicate in a WGBS assay is 25X and the recommended value is > 30X (See {ENCODE WGBS data standards|/data-standards/wgbs/} )",
+                        "category": "low coverage"
+                    }
+                ]
+            },
+            "award": {
+                "project": "ENCODE"
+            },
+            "biosample_ontology": {
+                "term_name": "K562"
+            },
+            "biosample_summary": "K562",
+            "dbxrefs": [
+                "GEO:GSE86747"
+            ],
+            "description": "HAIB Whole Genome Bisulfite Sequencing K562",
+            "files": [
+                {
+                    "@id": "/files/ENCFF413KHN/"
+                },
+                {
+                    "@id": "/files/ENCFF567DAI/"
+                },
+                {
+                    "@id": "/files/ENCFF336KJH/"
+                },
+                {
+                    "@id": "/files/ENCFF585HYM/"
+                },
+                {
+                    "@id": "/files/ENCFF202JPK/"
+                },
+                {
+                    "@id": "/files/ENCFF867JRG/"
+                },
+                {
+                    "@id": "/files/ENCFF965YBN/"
+                },
+                {
+                    "@id": "/files/ENCFF557TER/"
+                },
+                {
+                    "@id": "/files/ENCFF963XLT/"
+                },
+                {
+                    "@id": "/files/ENCFF381QBR/"
+                },
+                {
+                    "@id": "/files/ENCFF827YGC/"
+                },
+                {
+                    "@id": "/files/ENCFF872YSC/"
+                },
+                {
+                    "@id": "/files/ENCFF283XIX/"
+                },
+                {
+                    "@id": "/files/ENCFF149NUQ/"
+                },
+                {
+                    "@id": "/files/ENCFF669KCI/"
+                },
+                {
+                    "@id": "/files/ENCFF232QQH/"
+                },
+                {
+                    "@id": "/files/ENCFF236AMS/"
+                },
+                {
+                    "@id": "/files/ENCFF874RQY/"
+                },
+                {
+                    "@id": "/files/ENCFF721JMB/"
+                },
+                {
+                    "@id": "/files/ENCFF490XPH/"
+                }
+            ],
+            "lab": {
+                "title": "Richard Myers, HAIB"
+            },
+            "related_series": [
+                {
+                    "dbxrefs": [
+                        "IHEC:IHECRE00001887"
+                    ],
+                    "original_files": [],
+                    "aliases": [],
+                    "references": [],
+                    "documents": [],
+                    "@type": [
+                        "ReferenceEpigenome",
+                        "Series",
+                        "Dataset",
+                        "Item"
+                    ],
+                    "description": "Reference epigenome for human K562 cell line",
+                    "accession": "ENCSR612NLL",
+                    "lab": "/labs/encode-consortium/",
+                    "uuid": "5b53dad2-96aa-4128-a13f-25a33ae661d8",
+                    "superseded_by": [],
+                    "date_released": "2016-08-19",
+                    "supersedes": [
+                        "/reference-epigenomes/ENCSR532GIR/"
+                    ],
+                    "schema_version": "17",
+                    "award": "/awards/U41HG006992/",
+                    "alternate_accessions": [],
+                    "assay_term_id": [
+                        "OBI:0001863",
+                        "OBI:0002571",
+                        "OBI:0001922",
+                        "OBI:0001853",
+                        "OBI:0002112",
+                        "OBI:0001271",
+                        "OBI:0000716",
+                        "OBI:0002039"
+                    ],
+                    "assembly": [
+                        "hg19",
+                        "GRCh38"
+                    ],
+                    "@id": "/reference-epigenomes/ENCSR612NLL/",
+                    "control_type": [
+                        "input library",
+                        "IgG"
+                    ],
+                    "organism": [
+                        "/organisms/human/"
+                    ],
+                    "date_created": "2015-12-14T18:55:40.404433+00:00",
+                    "submitted_by": "/users/85978cd9-131e-48e2-a389-f752ab05b0a6/",
+                    "assay_synonyms": [
+                        "Shotgun bisulfite sequencing",
+                        "polyA-selected RNA sequencing assay",
+                        "WGSBS",
+                        "chromatin immunoprecipitation sequencing assay",
+                        "assay for transposase-accessible chromatin using sequencing",
+                        "short RNA-seq",
+                        "small RNA-seq",
+                        "ATAC-seq",
+                        "WGBS",
+                        "miRNA-seq",
+                        "DNase I hypersensitive sites sequencing assay",
+                        "miRNA-HTS",
+                        "small RNA sequencing assay",
+                        "microRNA profiling by high throughput sequencing assay",
+                        "transcription profiling by high throughput sequencing",
+                        "whole genome bisulfite sequencing",
+                        "microRNA-seq",
+                        "whole-genome shotgun bisulfite sequencing",
+                        "ATAC-seq assay",
+                        "ChIP-seq assay",
+                        "RNA-seq assay",
+                        "shotgun bisulfite-seq assay",
+                        "mRNA-seq",
+                        "microRNA-seq assay"
+                    ],
+                    "revoked_files": [],
+                    "revoked_datasets": [],
+                    "target": [
+                        "/targets/H3K9me3-human/",
+                        "/targets/POLR2AphosphoS5-human/",
+                        "/targets/H3K4me1-human/",
+                        "/targets/H3K27me3-human/",
+                        "/targets/H3K4me3-human/",
+                        "/targets/POLR2A-human/",
+                        "/targets/H3K36me3-human/",
+                        "/targets/H3K27ac-human/",
+                        "/targets/CTCF-human/",
+                        "/targets/EP300-human/"
+                    ],
+                    "assay_term_name": [
+                        "ChIP-seq",
+                        "RNA-seq",
+                        "small RNA-seq",
+                        "ATAC-seq",
+                        "DNase-seq",
+                        "microRNA-seq",
+                        "whole-genome shotgun bisulfite sequencing",
+                        "polyA plus RNA-seq"
+                    ],
+                    "treatment_term_name": [],
+                    "related_datasets": [
+                        "/experiments/ENCSR000AEP/",
+                        "/experiments/ENCSR000AES/",
+                        "/experiments/ENCSR000AKP/",
+                        "/experiments/ENCSR000AKS/",
+                        "/experiments/ENCSR000AKY/",
+                        "/experiments/ENCSR000APE/",
+                        "/experiments/ENCSR000BKR/",
+                        "/experiments/ENCSR000BLJ/",
+                        "/experiments/ENCSR000DWA/",
+                        "/experiments/ENCSR000DWB/",
+                        "/experiments/ENCSR000EGE/",
+                        "/experiments/ENCSR000EGM/",
+                        "/experiments/ENCSR000EHI/",
+                        "/experiments/ENCSR000EOT/",
+                        "/experiments/ENCSR000EWB/",
+                        "/experiments/ENCSR000EWK/",
+                        "/experiments/ENCSR109IQO/",
+                        "/experiments/ENCSR173USI/",
+                        "/experiments/ENCSR388QZF/",
+                        "/experiments/ENCSR569QVM/",
+                        "/experiments/ENCSR668LDD/",
+                        "/experiments/ENCSR765JPC/",
+                        "/experiments/ENCSR868FGK/"
+                    ],
+                    "hub": "/reference-epigenomes/ENCSR612NLL/@@hub/hub.txt",
+                    "biosample_ontology": [
+                        "/biosample-types/cell_line_EFO_0002067/"
+                    ],
+                    "contributing_files": [],
+                    "files": [],
+                    "internal_tags": [],
+                    "status": "released"
+                }
+            ],
+            "replicates": [
+                {
+                    "library": {
+                        "biosample": {
+                            "organism": {
+                                "scientific_name": "Homo sapiens"
+                            },
+                            "age_display": "53 years",
+                            "life_stage": "adult",
+                            "accession": "ENCBS316CKF"
+                        }
+                    },
+                    "@id": "/replicates/1add7e11-a642-42cd-9f4e-fe58fee29d88/",
+                    "technical_replicate_number": 1,
+                    "biological_replicate_number": 1
+                },
+                {
+                    "library": {
+                        "biosample": {
+                            "organism": {
+                                "scientific_name": "Homo sapiens"
+                            },
+                            "age_display": "53 years",
+                            "life_stage": "adult",
+                            "accession": "ENCBS577JGM"
+                        }
+                    },
+                    "@id": "/replicates/c5be26e4-fb27-4f3c-a508-592a2476ad5e/",
+                    "technical_replicate_number": 1,
+                    "biological_replicate_number": 2
+                }
+            ],
+            "status": "released"
+        }
+    ],
+    "@id": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category!=insufficient+coverage&format=json",
+    "@type": [
+        "Search"
+    ],
+    "clear_filters": "/search/?type=Experiment",
+    "columns": {
+        "@id": {
+            "title": "ID"
+        },
+        "accession": {
+            "title": "Accession"
+        },
+        "assay_term_name": {
+            "title": "Assay name"
+        },
+        "assay_title": {
+            "title": "Assay title"
+        },
+        "target.label": {
+            "title": "Target of assay"
+        },
+        "target.genes.symbol": {
+            "title": "Target gene symbol"
+        },
+        "biosample_summary": {
+            "title": "Biosample summary"
+        },
+        "biosample_ontology.term_name": {
+            "title": "Biosample term name"
+        },
+        "dbxrefs": {
+            "title": "Dbxrefs"
+        },
+        "description": {
+            "title": "Description"
+        },
+        "lab.title": {
+            "title": "Lab"
+        },
+        "award.project": {
+            "title": "Project"
+        },
+        "status": {
+            "title": "Status"
+        },
+        "files.@id": {
+            "title": "Files"
+        },
+        "related_series": {
+            "title": "Related series"
+        },
+        "replicates.library.biosample.accession": {
+            "title": "Biosample accession"
+        },
+        "replicates.biological_replicate_number": {
+            "title": "Biological replicate"
+        },
+        "replicates.technical_replicate_number": {
+            "title": "Technical replicate"
+        },
+        "replicates.antibody.accession": {
+            "title": "Linked antibody"
+        },
+        "replicates.library.biosample.organism.scientific_name": {
+            "title": "Organism"
+        },
+        "replicates.library.biosample.life_stage": {
+            "title": "Life stage"
+        },
+        "replicates.library.biosample.age_display": {
+            "title": "Biosample age"
+        },
+        "replicates.library.biosample.treatments.treatment_term_name": {
+            "title": "Biosample treatment"
+        },
+        "replicates.library.biosample.treatments.treatment_term_id": {
+            "title": "Biosample treatment ontology ID"
+        },
+        "replicates.library.biosample.treatments.concentration": {
+            "title": "Biosample treatment concentration"
+        },
+        "replicates.library.biosample.treatments.concentration_units": {
+            "title": "Biosample treatment concentration units"
+        },
+        "replicates.library.biosample.treatments.duration": {
+            "title": "Biosample treatment duration"
+        },
+        "replicates.library.biosample.treatments.duration_units": {
+            "title": "Biosample treatment duration units"
+        },
+        "replicates.library.biosample.synchronization": {
+            "title": "Synchronization"
+        },
+        "replicates.library.biosample.post_synchronization_time": {
+            "title": "Post-synchronization time"
+        },
+        "replicates.library.biosample.post_synchronization_time_units": {
+            "title": "Post-synchronization time units"
+        },
+        "replicates.@id": {
+            "title": "Replicates"
+        }
+    },
+    "facets": [
+        {
+            "field": "type",
+            "title": "Data Type",
+            "terms": [
+                {
+                    "key": "Dataset",
+                    "doc_count": 5
+                },
+                {
+                    "key": "Experiment",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "assay_slims",
+            "title": "Assay type",
+            "terms": [
+                {
+                    "key": "DNA methylation",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "assay_title",
+            "title": "Assay title",
+            "terms": [
+                {
+                    "key": "TF ChIP-seq",
+                    "doc_count": 1492
+                },
+                {
+                    "key": "eCLIP",
+                    "doc_count": 223
+                },
+                {
+                    "key": "Histone ChIP-seq",
+                    "doc_count": 61
+                },
+                {
+                    "key": "shRNA RNA-seq",
+                    "doc_count": 58
+                },
+                {
+                    "key": "polyA plus RNA-seq",
+                    "doc_count": 39
+                },
+                {
+                    "key": "small RNA-seq",
+                    "doc_count": 26
+                },
+                {
+                    "key": "Control ChIP-seq",
+                    "doc_count": 21
+                },
+                {
+                    "key": "CRISPR RNA-seq",
+                    "doc_count": 20
+                },
+                {
+                    "key": "total RNA-seq",
+                    "doc_count": 19
+                },
+                {
+                    "key": "CAGE",
+                    "doc_count": 13
+                },
+                {
+                    "key": "polyA minus RNA-seq",
+                    "doc_count": 11
+                },
+                {
+                    "key": "ATAC-seq",
+                    "doc_count": 7
+                },
+                {
+                    "key": "WGBS",
+                    "doc_count": 5
+                },
+                {
+                    "key": "microRNA-seq",
+                    "doc_count": 5
+                },
+                {
+                    "key": "DNase-seq",
+                    "doc_count": 4
+                },
+                {
+                    "key": "CRISPRi RNA-seq",
+                    "doc_count": 3
+                },
+                {
+                    "key": "RAMPAGE",
+                    "doc_count": 2
+                },
+                {
+                    "key": "scRNA-seq",
+                    "doc_count": 2
+                },
+                {
+                    "key": "Hi-C",
+                    "doc_count": 1
+                }
+            ],
+            "total": 2012,
+            "type": "typeahead",
+            "appended": false,
+            "open_on_load": true
+        },
+        {
+            "field": "status",
+            "title": "Status",
+            "terms": [
+                {
+                    "key": "released",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": true
+        },
+        {
+            "field": "perturbed",
+            "title": "Perturbation",
+            "terms": [
+                {
+                    "key": 0,
+                    "key_as_string": "false",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": true
+        },
+        {
+            "field": "replicates.library.biosample.donor.organism.scientific_name",
+            "title": "Organism",
+            "terms": [
+                {
+                    "key": "Homo sapiens",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": true
+        },
+        {
+            "field": "biosample_ontology.classification",
+            "title": "Biosample classification",
+            "terms": [
+                {
+                    "key": "cell line",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "biosample_ontology.term_name",
+            "title": "Biosample term name",
+            "terms": [
+                {
+                    "key": "GM23248",
+                    "doc_count": 2
+                },
+                {
+                    "key": "HepG2",
+                    "doc_count": 2
+                },
+                {
+                    "key": "A549",
+                    "doc_count": 1
+                },
+                {
+                    "key": "GM12878",
+                    "doc_count": 1
+                },
+                {
+                    "key": "HeLa-S3",
+                    "doc_count": 1
+                },
+                {
+                    "key": "K562",
+                    "doc_count": 1
+                },
+                {
+                    "key": "OCI-LY7",
+                    "doc_count": 1
+                },
+                {
+                    "key": "SK-N-SH",
+                    "doc_count": 1
+                }
+            ],
+            "total": 10,
+            "type": "typeahead",
+            "appended": false,
+            "open_on_load": true
+        },
+        {
+            "field": "biosample_ontology.organ_slims",
+            "title": "Organ",
+            "terms": [
+                {
+                    "key": "blood",
+                    "doc_count": 2
+                },
+                {
+                    "key": "bodily fluid",
+                    "doc_count": 2
+                },
+                {
+                    "key": "endocrine gland",
+                    "doc_count": 2
+                },
+                {
+                    "key": "epithelium",
+                    "doc_count": 2
+                },
+                {
+                    "key": "exocrine gland",
+                    "doc_count": 2
+                },
+                {
+                    "key": "liver",
+                    "doc_count": 2
+                },
+                {
+                    "key": "lung",
+                    "doc_count": 1
+                }
+            ],
+            "total": 5,
+            "type": "typeahead",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "biosample_ontology.cell_slims",
+            "title": "Cell",
+            "terms": [
+                {
+                    "key": "cancer cell",
+                    "doc_count": 4
+                },
+                {
+                    "key": "epithelial cell",
+                    "doc_count": 2
+                },
+                {
+                    "key": "hematopoietic cell",
+                    "doc_count": 2
+                },
+                {
+                    "key": "leukocyte",
+                    "doc_count": 2
+                },
+                {
+                    "key": "B cell",
+                    "doc_count": 1
+                }
+            ],
+            "total": 5,
+            "type": "typeahead",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "replicates.library.biosample.life_stage",
+            "title": "Life stage",
+            "terms": [
+                {
+                    "key": "adult",
+                    "doc_count": 3
+                },
+                {
+                    "key": "child",
+                    "doc_count": 2
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "award.project",
+            "title": "Project",
+            "terms": [
+                {
+                    "key": "ENCODE",
+                    "doc_count": 5
+                },
+                {
+                    "key": "Roadmap",
+                    "doc_count": 1
+                }
+            ],
+            "total": 6,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "award.rfa",
+            "title": "RFA",
+            "terms": [
+                {
+                    "key": "ENCODE3",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "assembly",
+            "title": "Genome assembly",
+            "terms": [
+                {
+                    "key": "GRCh38",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "files.file_type",
+            "title": "Available file types",
+            "terms": [
+                {
+                    "key": "bam",
+                    "doc_count": 5
+                },
+                {
+                    "key": "bed bedMethyl",
+                    "doc_count": 5
+                },
+                {
+                    "key": "bigBed bedMethyl",
+                    "doc_count": 5
+                },
+                {
+                    "key": "bigWig",
+                    "doc_count": 5
+                },
+                {
+                    "key": "fastq",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "files.platform.term_name",
+            "title": "Platform",
+            "terms": [
+                {
+                    "key": "Illumina HiSeq 2500",
+                    "doc_count": 3
+                },
+                {
+                    "key": "Illumina HiSeq X Ten",
+                    "doc_count": 2
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "files.run_type",
+            "title": "Run type",
+            "terms": [
+                {
+                    "key": "paired-ended",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "files.read_length",
+            "title": "Read length (nt)",
+            "terms": [
+                {
+                    "key": 125,
+                    "doc_count": 3
+                },
+                {
+                    "key": 151,
+                    "doc_count": 2
+                },
+                {
+                    "key": 100,
+                    "doc_count": 1
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "replicates.library.size_range",
+            "title": "Library fragment size (nt)",
+            "terms": [
+                {
+                    "key": "100-300",
+                    "doc_count": 1
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "replicates.library.nucleic_acid_term_name",
+            "title": "Library material",
+            "terms": [
+                {
+                    "key": "DNA",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "date_released",
+            "title": "Date released",
+            "terms": [
+                {
+                    "key": "2015-10-13",
+                    "doc_count": 1
+                },
+                {
+                    "key": "2016-02-23",
+                    "doc_count": 1
+                },
+                {
+                    "key": "2016-03-22",
+                    "doc_count": 1
+                },
+                {
+                    "key": "2017-12-01",
+                    "doc_count": 1
+                },
+                {
+                    "key": "2017-12-04",
+                    "doc_count": 1
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "date_submitted",
+            "title": "Date submitted",
+            "terms": [
+                {
+                    "key": "2017-11-08",
+                    "doc_count": 2
+                },
+                {
+                    "key": "2015-04-03",
+                    "doc_count": 1
+                },
+                {
+                    "key": "2015-07-31",
+                    "doc_count": 1
+                },
+                {
+                    "key": "2015-12-16",
+                    "doc_count": 1
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "lab.title",
+            "title": "Lab",
+            "terms": [
+                {
+                    "key": "Richard Myers, HAIB",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "internal_status",
+            "title": "Internal status",
+            "terms": [
+                {
+                    "key": "unreviewed",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "replication_type",
+            "title": "Replication type",
+            "terms": [
+                {
+                    "key": "isogenic",
+                    "doc_count": 5
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "audit.NOT_COMPLIANT.category",
+            "title": "Audit category: NOT COMPLIANT",
+            "terms": [
+                {
+                    "key": "insufficient coverage",
+                    "doc_count": 1
+                }
+            ],
+            "total": 6,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        },
+        {
+            "field": "audit.WARNING.category",
+            "title": "Audit category: WARNING",
+            "terms": [
+                {
+                    "key": "low coverage",
+                    "doc_count": 1
+                },
+                {
+                    "key": "mixed read lengths",
+                    "doc_count": 1
+                }
+            ],
+            "total": 5,
+            "type": "terms",
+            "appended": false,
+            "open_on_load": false
+        }
+    ],
+    "filters": [
+        {
+            "field": "assay_title",
+            "term": "WGBS",
+            "remove": "/search/?type=Experiment&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "status",
+            "term": "released",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "perturbed",
+            "term": "false",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "replicates.library.biosample.donor.organism.scientific_name",
+            "term": "Homo sapiens",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "biosample_ontology.classification",
+            "term": "cell line",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "biosample_ontology.term_name",
+            "term": "K562",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "biosample_ontology.term_name",
+            "term": "HepG2",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "biosample_ontology.term_name",
+            "term": "GM12878",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "biosample_ontology.term_name",
+            "term": "A549",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "biosample_ontology.term_name",
+            "term": "H1",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "award.project",
+            "term": "ENCODE",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "assembly",
+            "term": "GRCh38",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "files.file_type",
+            "term": "bigWig",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "replication_type",
+            "term": "isogenic",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        },
+        {
+            "field": "audit.NOT_COMPLIANT.category!",
+            "term": "insufficient coverage",
+            "remove": "/search/?type=Experiment&assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&format=json"
+        },
+        {
+            "field": "type",
+            "term": "Experiment",
+            "remove": "/search/?assay_title=WGBS&status=released&perturbed=false&replicates.library.biosample.donor.organism.scientific_name=Homo+sapiens&biosample_ontology.classification=cell+line&biosample_ontology.term_name=K562&biosample_ontology.term_name=HepG2&biosample_ontology.term_name=GM12878&biosample_ontology.term_name=A549&biosample_ontology.term_name=H1&award.project=ENCODE&assembly=GRCh38&files.file_type=bigWig&replication_type=isogenic&audit.NOT_COMPLIANT.category%21=insufficient+coverage&format=json"
+        }
+    ],
+    "notification": "Success",
+    "sort": {
+        "date_created": {
+            "order": "desc",
+            "unmapped_type": "keyword"
+        },
+        "label": {
+            "order": "desc",
+            "unmapped_type": "keyword"
+        },
+        "uuid": {
+            "order": "desc",
+            "unmapped_type": "keyword"
+        }
+    },
+    "title": "Search",
+    "total": 5
+}
