@@ -6,6 +6,7 @@ import pandas as pd
 
 def load_epigenomes(
     cell_line: str = "K562",
+    assembly: str = "hg38",
     dataset: str = "fantom",
     regions: str = "promoters",
     window_size: int = 200,
@@ -20,6 +21,8 @@ def load_epigenomes(
         Cell line to consider. By default K562.
         Currently available cell lines are
         listed in the repository README file.
+    assembly: str,
+        The genomic assembly of the data to be retrieved.
     dataset: str = "fantom",
         Dataset to consider. By default fantom.
         Currently available datasets are

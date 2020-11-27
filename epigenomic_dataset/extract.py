@@ -35,10 +35,29 @@ def _extraction_job(kwargs):
     return extraction_job(**kwargs)
 
 
-def load_epigenomes_table(cell_lines: List[str]):
+def load_epigenomes_table(
+    cell_lines: List[str],
+    assembly: str,
+) -> pd.DataFrame:
+    """Return epigenomic data table.
+
+    Parameters
+    ----------------------------
+    cell_lines:List[str],
+        List of cell lines whose epigenomes are to retrieve.
+    assembly: str,
+        The genomic assembly of the data to be retrieved.
+
+    Returns
+    ----------------------------
+    Pandas DataFrame with epigenomes meta data.
+    """
     # Loading the epigenomes metadata
     epigenomes = pd.read_csv(
-        "{}/epigenomes.csv".format(os.path.dirname(os.path.abspath(__file__)))
+        "{pwd}/epigenomes_metadata/{assembly}.csv".format(
+            pwd=os.path.dirname(os.path.abspath(__file__)),
+            assembly=assembly
+        )
     )
     # Filtering epigenomes for required cell lines
     return epigenomes[epigenomes.cell_line.isin(cell_lines)]
@@ -54,6 +73,7 @@ def load_accession_path(root: str, accession: str) -> str:
 def build_extraction_tasks(
     bed_path: str,
     cell_lines: List[str],
+    assembly: str,
     epigenomes_path: str,
     target_path: str,
     clear_download: bool
@@ -66,6 +86,8 @@ def build_extraction_tasks(
         Either path to the bed file containing the regions of interest.
     cell_lines:List[str],
         List of cell lines whose epigenomes are to retrieve.
+    assembly: str,
+        The genomic assembly of the data to be retrieved.
     epigenomes_path:str,
         Path where to store the epigenomic bigWig.
     target_path:str,
@@ -79,7 +101,7 @@ def build_extraction_tasks(
     Returns list of tasks to be executed.
     """
     # Loading the epigenomes metadata
-    epigenomes = load_epigenomes_table(cell_lines)
+    epigenomes = load_epigenomes_table(cell_lines, assembly)
     # Build the tasks
     return [
         {
@@ -102,6 +124,7 @@ def build_extraction_tasks(
 def extract(
     bed_path: str,
     cell_lines: List[str],
+    assembly: str,
     epigenomes_path: str = "epigenomes",
     targets_path: str = "targets",
     clear_download: bool = False,
@@ -115,6 +138,8 @@ def extract(
         Either path to the bed file containing the regions of interest.
     cell_lines:List[str],
         List of cell lines whose epigenomes are to retrieve.
+    assembly: str,
+        The genomic assembly of the data to be retrieved.
     epigenomes_path:str,
         Path where to store the epigenomic bigWig.
     targets_path:str,
@@ -138,7 +163,9 @@ def extract(
     os.makedirs(targets_path, exist_ok=True)
     # Create the building tasks list
     tasks = build_extraction_tasks(
-        bed_path, cell_lines,
+        bed_path,
+        cell_lines,
+        assembly,
         epigenomes_path,
         targets_path, clear_download
     )
