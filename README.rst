@@ -22,6 +22,8 @@ different results, here's three of them:
 |coveralls| |sonar_coverage| |code_climate_coverage|
 
 
+TODO: THE FOLLOWING SECTION WILL NEED RESTRUCTURING IN A LITTLE BIT!
+
 Preprocessed data for cis-regulatory regions
 -----------------------------------------------
 We have already downloaded and obtained the max window value for each promoter and enhancer
