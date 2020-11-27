@@ -100,7 +100,20 @@ def _parse_extracted_epigenome(kwargs: Dict):
     return parse_extracted_epigenome(**kwargs)
 
 
-def mine(root: str, statistics: Dict[str, bool], cell_lines: List[str]):
+def mine(
+    root: str,
+    statistics: Dict[str, bool],
+    cell_lines: List[str],
+    assembly: str
+):
+    """
+
+    TODO: update documentation.
+
+    Parameters
+    -----------------
+
+    """
     tasks = [
         {
             "sources": [
@@ -110,7 +123,7 @@ def mine(root: str, statistics: Dict[str, bool], cell_lines: List[str]):
             "target": get_target_path(root, cell_line, target),
             "statistics": statistics
         }
-        for (cell_line, target), group in load_epigenomes_table(cell_lines).groupby(["cell_line", "target"])
+        for (cell_line, target), group in load_epigenomes_table(cell_lines, assembly).groupby(["cell_line", "target"])
         if not os.path.exists(get_target_path(root, cell_line, target))
     ]
 

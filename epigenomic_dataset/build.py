@@ -70,7 +70,8 @@ def build(
             "median": mine_median,
             "variance": mine_variance,
         },
-        cell_lines
+        cell_lines,
+        assembly
     )
     concatenate(
         targets_path,
