@@ -20,7 +20,7 @@ def build(
     mine_variance: bool = False
 ):
     """Build the dataset.
-    
+
     Parameters
     --------------------------
     bed_path:str,
@@ -76,5 +76,6 @@ def build(
     concatenate(
         targets_path,
         cell_lines,
-        concatenation_workers
+        assembly,
+        concatenation_workers,
     )
