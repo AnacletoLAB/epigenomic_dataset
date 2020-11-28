@@ -17,7 +17,12 @@ def _to_dict(kwargs):
     return to_dict(**kwargs)
 
 
-def concatenate(root: str, cell_lines: List[str], workers: int):
+def concatenate(
+    root: str,
+    cell_lines: List[str],
+    assembly: str,
+    workers: int
+):
     """Concatenate the targets into a single file.
 
     Parameters
@@ -27,10 +32,12 @@ def concatenate(root: str, cell_lines: List[str], workers: int):
         to concatenate.
     cell_lines: List[str],
         Cell lines to consider.
+    assembly: str,
+        The genomic assembly of the data to be retrieved.
     workers: int,
         Workers to use to parallelize the loading.
     """
-    table = load_epigenomes_table(cell_lines)
+    table = load_epigenomes_table(cell_lines, assembly)
     if workers == -1:
         workers = cpu_count()
     with Pool(min(cpu_count(), workers)) as p:

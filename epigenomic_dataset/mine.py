@@ -39,16 +39,45 @@ def get_callback(statistic: str):
     }[statistic]
 
 
-def get_target_path(root: str, cell_line: str, target: str):
-    return "{root}/{cell_line}/{target}.csv.gz".format(
+def get_target_path(root: str, cell_line: str, assembly: str, target: str) -> str:
+    """Return path where the target epigenomic data are to be stored.
+
+    Parameters
+    -----------------------
+    root: str,
+        Root from where to search the files
+        to concatenate.
+    cell_line: str,
+        Cell line to consider.
+    assembly: str,
+        The genomic assembly of the data to be retrieved.
+    target: str,
+        The name of the genomic target.
+
+    Returns
+    -----------------------
+    The path where to store the epigenomic data.
+    """
+    return "{root}/{assembly}/{cell_line}/{target}.csv.gz".format(
         root=root,
         cell_line=cell_line,
+        assembly=assembly,
         target=target
     )
 
 
-def parse_extracted_epigenome(sources: str, target: str, statistics: Dict[str, bool]):
-    """Parse the given source bed-like file."""
+def parse_extracted_epigenome(sources: List[str], target: str, statistics: Dict[str, bool]):
+    """Parse the given source bed-like file.
+
+    Parameters
+    ----------------------------
+    sources: List[str],
+        Paths from where to load the sources.
+    target: str,
+        Epigenomic data target.
+    statistics: Dict[str, bool]
+        Statistics to be extracted.
+    """
     header = compute_header(statistics)
     callbacks = [
         get_callback(s)
@@ -106,13 +135,19 @@ def mine(
     cell_lines: List[str],
     assembly: str
 ):
-    """
-
-    TODO: update documentation.
+    """Extract and saves requested statistics from epigenomic files.
 
     Parameters
-    -----------------
-
+    -----------------------
+    root: str,
+        Root from where to search the files
+        to concatenate.
+    statistics: Dict[str, bool],
+        Dictionary of statistics to extract from windows.
+    cell_line: str,
+        Cell line to consider.
+    assembly: str,
+        The genomic assembly of the data to be retrieved.
     """
     tasks = [
         {
@@ -120,11 +155,11 @@ def mine(
                 load_accession_path(root, accession)
                 for accession in group.accession
             ],
-            "target": get_target_path(root, cell_line, target),
+            "target": get_target_path(root, cell_line, assembly, target),
             "statistics": statistics
         }
         for (cell_line, target), group in load_epigenomes_table(cell_lines, assembly).groupby(["cell_line", "target"])
-        if not os.path.exists(get_target_path(root, cell_line, target))
+        if not os.path.exists(get_target_path(root, assembly, cell_line, target))
     ]
 
     with Pool(cpu_count()) as p:
