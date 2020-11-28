@@ -50,7 +50,7 @@ def concatenate(
                 continue
             paths = [
                 {
-                    "path": get_target_path(root, cell_line, target),
+                    "path": get_target_path(root, cell_line, assembly, target),
                     "target": target
                 }
                 for target in group.target.unique()
