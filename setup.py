@@ -62,8 +62,8 @@ setup(
     install_requires=[
         "encodeproject>=1.0.19",
         "pybwtool>=1.0.8",
-        "crr_labels>=1.0.7",
-        "notipy_me>=1.3.11"
+        "crr_labels>=1.1.0",
+        "notipy_me>=1.3.23"
     ],
     extras_require=extras,
 )

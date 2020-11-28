@@ -42,8 +42,9 @@ def concatenate(
         workers = cpu_count()
     with Pool(min(cpu_count(), workers)) as p:
         for cell_line, group in tqdm(table.groupby("cell_line"), leave=False, desc="Concatenating cell lines"):
-            path = "{root}/{cell_line}.csv.gz".format(
+            path = "{root}/{assembly}/{cell_line}.csv.xz".format(
                 root=root,
+                assembly=assembly,
                 cell_line=cell_line
             )
             if os.path.exists(path):
