@@ -101,17 +101,31 @@ if __name__ == "__main__":
                     # whetever to drop the rows where no activation is detected for every rows.
                     drop_always_inactive_rows=False
                 )
+                enhancers.to_csv(
+                    get_bed_path("fantom", assembly,
+                                 "enhancers", windows_size),
+                    sep="\t",
+                    index=False
+                )
+                promoters.to_csv(
+                    get_bed_path("fantom", assembly,
+                                 "promoters", windows_size),
+                    sep="\t",
+                    index=False
+                )
             else:
                 logger.info("Loading FANTOM labels.")
                 logger.info("Loading Enhancers.")
                 enhancers = pd.read_csv(
-                    get_bed_path("fantom", assembly, "enhancers", windows_size),
+                    get_bed_path("fantom", assembly,
+                                 "enhancers", windows_size),
                     sep="\t",
                     low_memory=False
                 )
                 logger.info("Loading Promoters.")
                 promoters = pd.read_csv(
-                    get_bed_path("fantom", assembly, "promoters", windows_size),
+                    get_bed_path("fantom", assembly,
+                                 "promoters", windows_size),
                     sep="\t",
                     low_memory=False
                 )
