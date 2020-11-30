@@ -1,5 +1,5 @@
 from crr_labels import fantom, roadmap
-from epigenomic_dataset import build
+from epigenomic_dataset import build, logger
 import pandas as pd
 from typing import List
 import os
@@ -90,7 +90,7 @@ if __name__ == "__main__":
             ####################################################
 
             if not bed_files_exist("fantom", assembly, windows_size):
-                print("Retrieving FANTOM labels")
+                logger.info("Retrieving FANTOM labels")
                 enhancers, promoters = fantom(
                     # list of cell lines to be considered.
                     cell_lines=cell_lines_fantom,
@@ -102,12 +102,21 @@ if __name__ == "__main__":
                     drop_always_inactive_rows=False
                 )
             else:
-                print("Loading FANTOM labels")
-                enhancers = pd.read_csv(get_bed_path(
-                    "fantom", assembly, "enhancers", windows_size), sep="\t")
-                promoters = pd.read_csv(get_bed_path(
-                    "fantom", assembly, "promoters", windows_size), sep="\t")
+                logger.info("Loading FANTOM labels.")
+                logger.info("Loading Enhancers.")
+                enhancers = pd.read_csv(
+                    get_bed_path("fantom", assembly, "enhancers", windows_size),
+                    sep="\t",
+                    low_memory=False
+                )
+                logger.info("Loading Promoters.")
+                promoters = pd.read_csv(
+                    get_bed_path("fantom", assembly, "promoters", windows_size),
+                    sep="\t",
+                    low_memory=False
+                )
 
+            logger.info("Starting to extract enhancers data.")
             run_pipeline(
                 enhancers,
                 root="fantom",
@@ -116,6 +125,7 @@ if __name__ == "__main__":
                 windows_size=windows_size,
                 cell_lines=cell_lines_encode
             )
+            logger.info("Starting to extract promoters data.")
             run_pipeline(
                 promoters,
                 root="fantom",
@@ -136,7 +146,7 @@ if __name__ == "__main__":
                 ####################################################
 
                 if not bed_files_exist("roadmap", assembly, windows_size):
-                    print("Retrieving ROADMAP labels")
+                    logger.info("Retrieving ROADMAP labels")
                     enhancers, promoters = roadmap(
                         # List of cell lines to be considered.
                         cell_lines=cell_lines_roadmap,
