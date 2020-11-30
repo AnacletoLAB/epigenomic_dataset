@@ -114,7 +114,7 @@ def parse_extracted_epigenome(sources: List[str], target: str, statistics: Dict[
                 ], axis=0)
                 metrics = [
                     str(np.nan)
-                    if np.all(np.isnan(scores))
+                    if np.all(np.isnan(scores)) or len(scores) == 0
                     else cal(scores).astype(str)
                     for cal in callbacks
                 ]
