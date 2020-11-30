@@ -8,6 +8,7 @@ import pandas as pd
 from tabulate import tabulate
 import csv
 import gzip
+import warnings
 from .extract import load_epigenomes_table, load_accession_path
 
 
@@ -95,31 +96,43 @@ def parse_extracted_epigenome(sources: List[str], target: str, statistics: Dict[
         csv.reader(source_file, delimiter='\t')
         for source_file in source_files
     ]
-
-    with gzip.open(target, "wt") as t:
-        # Starting by writing the head
-        t.write(header)
-        # And now we parse the lines one by one
-        for rows in zip(*readers):
-            # We extract the values
-            chrom, chromStart, chromEnd, _, _, strand = rows[0][:6]
-            # Convert the scores to float values
-            scores = np.nanmean([
-                [
-                    float(s) if s != "NA" else np.nan
-                    for s in row[7:]
+    try:
+        with gzip.open(target, "wt") as t:
+            # Starting by writing the head
+            t.write(header)
+            # And now we parse the lines one by one
+            for rows in zip(*readers):
+                # We extract the values
+                chrom, chromStart, chromEnd, _, _, strand = rows[0][:6]
+                # Convert the scores to float values
+                scores = np.nanmean([
+                    [
+                        float(s) if s != "NA" else np.nan
+                        for s in row[7:]
+                    ]
+                    for row in rows
+                ], axis=0)
+                metrics = [
+                    np.nan
+                    if np.all(np.isnan(scores))
+                    else cal(scores).astype(str)
+                    for cal in callbacks
                 ]
-                for row in rows
-            ], axis=0)
-            metrics = [
-                cal(scores).astype(str)
-                for cal in callbacks
-            ]
-            # And write the results
-            t.write("\t".join([
-                chrom, chromStart, chromEnd, strand,
-                *metrics
-            ])+'\n')
+                # And write the results
+                t.write("\t".join([
+                    chrom, chromStart, chromEnd, strand,
+                    *metrics
+                ])+'\n')
+    except EOFError:
+        warnings.warn((
+            "Unable to properly finish reading corrupted compressed files {}. "
+            "I am now deleting these files. "
+            "Just rerun the pipeline to retrieve them again."
+        ).format(
+            ", ".join(sources)
+        ))
+        for source in sources:
+            os.remove(source)
 
     for source_file in source_files:
         source_file.close()
