@@ -104,20 +104,26 @@ def parse_extracted_epigenome(sources: List[str], target: str, statistics: Dict[
             for rows in zip(*readers):
                 # We extract the values
                 chrom, chromStart, chromEnd, _, _, strand = rows[0][:6]
-                # Obtain the unaverages_score
-                unaveraged_score = [
-                    float(s) if s != "NA" else np.nan
-                    for s in row[7:]
+                # Convert the scores to float values
+                scores = [
+                    [
+                        float(s) if s != "NA" else np.nan
+                        for s in row[7:]
+                    ]
                     for row in rows
                 ]
-                # Convert the scores to float values
-                scores = [np.nan] if len(unaveraged_score) == 0 or np.all(
-                    np.isnan(unaveraged_score)) else np.nanmean(unaveraged_score, axis=0)
-
+                # Compute the averages in a fully defined way
+                averaged_scores = [
+                    np.nan
+                    if len(sub_scores) == 0 or np.all(np.isnan(sub_scores))
+                    else np.nanmean(sub_scores)
+                    for sub_scores in scores
+                ]
+                # Compute the metrics
                 metrics = [
                     str(np.nan)
-                    if np.all(np.isnan(scores)) or len(scores) == 0
-                    else cal(scores).astype(str)
+                    if len(averaged_scores) == 0 or np.all(np.isnan(averaged_scores))
+                    else cal(averaged_scores).astype(str)
                     for cal in callbacks
                 ]
                 # And write the results
