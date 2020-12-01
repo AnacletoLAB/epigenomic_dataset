@@ -85,6 +85,12 @@ if __name__ == "__main__":
         build_roadmap = False
 
         for windows_size in tqdm(windows_sizes, desc="Parsing window sizes"):
+
+            enhancers_path = get_bed_path("fantom", assembly,
+                                          "enhancers", windows_size)
+            promoters_path = get_bed_path("fantom", assembly,
+                                          "promoters", windows_size)
+
             ####################################################
             # HERE WE BUILD FANTOM                             #
             ####################################################
@@ -101,15 +107,16 @@ if __name__ == "__main__":
                     # whetever to drop the rows where no activation is detected for every rows.
                     drop_always_inactive_rows=False
                 )
+                for path in (enhancers_path, promoters_path):
+                    os.makedirs(path, exist_ok=True)
+
                 enhancers.to_csv(
-                    get_bed_path("fantom", assembly,
-                                 "enhancers", windows_size),
+                    enhancers_path,
                     sep="\t",
                     index=False
                 )
                 promoters.to_csv(
-                    get_bed_path("fantom", assembly,
-                                 "promoters", windows_size),
+                    promoters_path,
                     sep="\t",
                     index=False
                 )
@@ -117,15 +124,13 @@ if __name__ == "__main__":
                 logger.info("Loading FANTOM labels.")
                 logger.info("Loading Enhancers.")
                 enhancers = pd.read_csv(
-                    get_bed_path("fantom", assembly,
-                                 "enhancers", windows_size),
+                    enhancers_path,
                     sep="\t",
                     low_memory=False
                 )
                 logger.info("Loading Promoters.")
                 promoters = pd.read_csv(
-                    get_bed_path("fantom", assembly,
-                                 "promoters", windows_size),
+                    promoters_path,
                     sep="\t",
                     low_memory=False
                 )
