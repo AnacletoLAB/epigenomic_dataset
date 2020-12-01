@@ -108,7 +108,7 @@ if __name__ == "__main__":
                     drop_always_inactive_rows=False
                 )
                 for path in (enhancers_path, promoters_path):
-                    os.makedirs(path, exist_ok=True)
+                    os.makedirs(os.path.dirname(path), exist_ok=True)
 
                 enhancers.to_csv(
                     enhancers_path,
