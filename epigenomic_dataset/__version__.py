@@ -1,2 +1,2 @@
 """Current version of package epigenomic_dataset"""
-__version__ = "1.1.7"
+__version__ = "1.2.0"
