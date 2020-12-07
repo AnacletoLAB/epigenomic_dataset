@@ -76,6 +76,5 @@ def build(
     concatenate(
         targets_path,
         cell_lines,
-        assembly,
         concatenation_workers,
     )
