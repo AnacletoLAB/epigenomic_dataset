@@ -38,7 +38,7 @@ def concatenate(
         for cell_line in tqdm([
             directory_name
             for directory_name in os.listdir(root)
-            if os.path.isdir(directory_name)
+            if os.path.isdir(f"{root}/{directory_name}")
         ], leave=False, desc="Concatenating cell lines"):
             path = "{root}/{cell_line}.csv.xz".format(
                 root=root,
