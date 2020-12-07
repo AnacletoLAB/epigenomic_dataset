@@ -61,7 +61,7 @@ def get_target_path(root: str, cell_line: str, assembly: str, assay_term_name: s
     -----------------------
     The path where to store the epigenomic data.
     """
-    return "{root}/{cell_line}/{file_name}.csv.xz".format(
+    return "{root}/{cell_line}/{file_name}.csv.gz".format(
         root=root,
         cell_line=cell_line,
         assembly=assembly,
