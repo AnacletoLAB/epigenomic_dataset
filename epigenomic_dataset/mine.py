@@ -64,7 +64,7 @@ def get_target_path(root: str, cell_line: str, assembly: str, assay_term_name: s
     file_name = "{}.csv.xz".format(
         assay_term_name if target == "Unknown" else target
     )
-    return "{root}/{assembly}/{cell_line}/{assay_term_name}.csv.xz".format(
+    return "{root}/{cell_line}/{assay_term_name}.csv.xz".format(
         root=root,
         cell_line=cell_line,
         assembly=assembly,
