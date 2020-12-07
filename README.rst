@@ -35,8 +35,9 @@ The thresholds used for classifying the activations of enhancers and promoters i
 default explained in the sister pipeline `CRR labels <https://github.com/LucaCappelletti94/crr_labels>`__
 which handles the download and preprocessing of the data from Fantom and Roadmap.
 
+=========  ==========  =============  =========  ===========  ==================================================================================================================================================
 Dataset    Assembly      Window Size  Region     Cell line    Download URL
----------  ----------  -------------  ---------  -----------  --------------------------------------------------------------------------------------------------------------------------------------------------
+=========  ==========  =============  =========  ===========  ==================================================================================================================================================
 fantom     hg38                  256  promoters  GM12878      `Download <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/fantom/hg38/256/promoters/GM12878.csv.xz?raw=true>`__
 fantom     hg38                  256  promoters  A549         `Download <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/fantom/hg38/256/promoters/A549.csv.xz?raw=true>`__
 fantom     hg38                  256  promoters  HEK293       `Download <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/fantom/hg38/256/promoters/HEK293.csv.xz?raw=true>`__
@@ -107,6 +108,7 @@ fantom     hg38                  512  enhancers  HepG2        `Download <https:/
 fantom     hg38                  512  enhancers  K562         `Download <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/fantom/hg38/512/enhancers/K562.csv.xz?raw=true>`__
 fantom     hg38                  512  enhancers  H1           `Download <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/fantom/hg38/512/enhancers/H1.csv.xz?raw=true>`__
 fantom     hg38                  512  enhancers  MCF-7        `Download <https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed/fantom/hg38/512/enhancers/MCF-7.csv.xz?raw=true>`__
+=========  ==========  =============  =========  ===========  ==================================================================================================================================================
 
 Here are the labels for all the considered cell lines.
 
