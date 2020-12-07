@@ -116,7 +116,7 @@ def build_extraction_tasks(
             "url": epigenome.url,
             "clear_download": clear_download
         }
-        for _, epigenome in tqdm(epigenomes.iterrows(), total=len(epigenomes), desc="Building tasks")
+        for _, epigenome in epigenomes.iterrows()
         if not os.path.exists("{target_path}/{accession}.bed.gz".format(target_path=target_path, **epigenome.to_dict()))
     ]
 
