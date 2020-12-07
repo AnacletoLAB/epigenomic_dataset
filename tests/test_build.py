@@ -5,7 +5,8 @@ import pytest
 
 
 def test_build():
-    for assembly in ("hg19", "hg38"):
+    # for assembly in ("hg19", "hg38"):
+    for assembly in ("hg38", ):
         build("tests/test.bed", ["GM12892"], assembly)
         with pytest.warns(UserWarning):
             build("tests/test.bed", ["GM12892"], assembly)
