@@ -44,7 +44,6 @@ def concatenate(
                 root=root,
                 cell_line=cell_line
             )
-            print(path)
             paths = glob("{root}/{cell_line}/*.csv.xz".format(
                 root=root,
                 cell_line=cell_line

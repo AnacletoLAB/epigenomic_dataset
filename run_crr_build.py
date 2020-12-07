@@ -78,132 +78,131 @@ def run_pipeline(
 
 
 if __name__ == "__main__":
-    with Notipy() as r:
-        cell_lines = ["GM12878"] #["A549", "GM12878", "H1", "HEK293", "HepG2", "K562"]
-        cell_lines_encode = cell_lines #+ ["MCF-7"]
-        cell_lines_fantom = cell_lines #+ ["MCF7"]
-        cell_lines_roadmap = ["A549", "GM12878", "H1", "HepG2", "K562"]
-        windows_sizes = (256,) #(1024, 512, 256, 128, 64)
-        assembly = "hg38"
-        # We are not computing RoadMap right now
-        # because we are still choosing the states from the model to be used.
-        build_roadmap = False
+    cell_lines = ["GM12878"] #["A549", "GM12878", "H1", "HEK293", "HepG2", "K562"]
+    cell_lines_encode = cell_lines #+ ["MCF-7"]
+    cell_lines_fantom = cell_lines #+ ["MCF7"]
+    cell_lines_roadmap = ["A549", "GM12878", "H1", "HepG2", "K562"]
+    windows_sizes = (256,) #(1024, 512, 256, 128, 64)
+    assembly = "hg38"
+    # We are not computing RoadMap right now
+    # because we are still choosing the states from the model to be used.
+    build_roadmap = False
 
-        for windows_size in tqdm(windows_sizes, desc="Parsing window sizes"):
+    for windows_size in tqdm(windows_sizes, desc="Parsing window sizes"):
 
-            enhancers_path = get_bed_path("fantom", assembly,
-                                          "enhancers", windows_size)
-            promoters_path = get_bed_path("fantom", assembly,
-                                          "promoters", windows_size)
+        enhancers_path = get_bed_path("fantom", assembly,
+                                        "enhancers", windows_size)
+        promoters_path = get_bed_path("fantom", assembly,
+                                        "promoters", windows_size)
 
+        ####################################################
+        # HERE WE BUILD FANTOM                             #
+        ####################################################
+
+        if not bed_files_exist("fantom", assembly, windows_size):
+            logger.info("Retrieving FANTOM labels")
+            enhancers, promoters = fantom(
+                # list of cell lines to be considered.
+                cell_lines=cell_lines_fantom,
+                # Genomic assembly to retrieve.
+                genome=assembly,
+                # window size to use for the various regions.
+                window_size=windows_size,
+                # whetever to drop the rows where no activation is detected for every rows.
+                drop_always_inactive_rows=False
+            )
+            for path in (enhancers_path, promoters_path):
+                os.makedirs(os.path.dirname(path), exist_ok=True)
+
+            enhancers.to_csv(
+                enhancers_path,
+                sep="\t",
+                index=False
+            )
+            promoters.to_csv(
+                promoters_path,
+                sep="\t",
+                index=False
+            )
+        else:
+            logger.info("Loading FANTOM labels.")
+            logger.info("Loading Enhancers.")
+            enhancers = pd.read_csv(
+                enhancers_path,
+                sep="\t",
+                low_memory=False
+            )
+            logger.info("Loading Promoters.")
+            promoters = pd.read_csv(
+                promoters_path,
+                sep="\t",
+                low_memory=False
+            )
+
+        logger.info("Starting to extract enhancers data.")
+        run_pipeline(
+            enhancers,
+            root="fantom",
+            assembly=assembly,
+            region="enhancers",
+            windows_size=windows_size,
+            cell_lines=cell_lines_encode
+        )
+        logger.info("Starting to extract promoters data.")
+        run_pipeline(
+            promoters,
+            root="fantom",
+            assembly=assembly,
+            region="promoters",
+            windows_size=windows_size,
+            cell_lines=cell_lines_encode
+        )
+
+        r.add_report({
+            "window_size": windows_size,
+            "dataset": "fantom"
+        })
+
+        if build_roadmap:
             ####################################################
-            # HERE WE BUILD FANTOM                             #
+            # HERE WE BUILD ROADMAP                            #
             ####################################################
 
-            if not bed_files_exist("fantom", assembly, windows_size):
-                logger.info("Retrieving FANTOM labels")
-                enhancers, promoters = fantom(
-                    # list of cell lines to be considered.
-                    cell_lines=cell_lines_fantom,
+            if not bed_files_exist("roadmap", assembly, windows_size):
+                logger.info("Retrieving ROADMAP labels")
+                enhancers, promoters = roadmap(
+                    # List of cell lines to be considered.
+                    cell_lines=cell_lines_roadmap,
                     # Genomic assembly to retrieve.
                     genome=assembly,
-                    # window size to use for the various regions.
+                    # Window size to use for the various regions.
                     window_size=windows_size,
-                    # whetever to drop the rows where no activation is detected for every rows.
-                    drop_always_inactive_rows=False
-                )
-                for path in (enhancers_path, promoters_path):
-                    os.makedirs(os.path.dirname(path), exist_ok=True)
-
-                enhancers.to_csv(
-                    enhancers_path,
-                    sep="\t",
-                    index=False
-                )
-                promoters.to_csv(
-                    promoters_path,
-                    sep="\t",
-                    index=False
                 )
             else:
-                logger.info("Loading FANTOM labels.")
-                logger.info("Loading Enhancers.")
-                enhancers = pd.read_csv(
-                    enhancers_path,
-                    sep="\t",
-                    low_memory=False
-                )
-                logger.info("Loading Promoters.")
-                promoters = pd.read_csv(
-                    promoters_path,
-                    sep="\t",
-                    low_memory=False
-                )
+                print("Loading ROADMAP labels")
+                enhancers = pd.read_csv(get_bed_path(
+                    "roadmap", assembly, "enhancers", windows_size), sep="\t")
+                promoters = pd.read_csv(get_bed_path(
+                    "roadmap", assembly, "promoters", windows_size), sep="\t")
 
-            logger.info("Starting to extract enhancers data.")
             run_pipeline(
                 enhancers,
-                root="fantom",
+                root="roadmap",
                 assembly=assembly,
                 region="enhancers",
                 windows_size=windows_size,
-                cell_lines=cell_lines_encode
+                cell_lines=cell_lines_roadmap
             )
-            logger.info("Starting to extract promoters data.")
             run_pipeline(
                 promoters,
-                root="fantom",
+                root="roadmap",
                 assembly=assembly,
                 region="promoters",
                 windows_size=windows_size,
-                cell_lines=cell_lines_encode
+                cell_lines=cell_lines_roadmap
             )
 
             r.add_report({
                 "window_size": windows_size,
-                "dataset": "fantom"
+                "dataset": "roadmap"
             })
-
-            if build_roadmap:
-                ####################################################
-                # HERE WE BUILD ROADMAP                            #
-                ####################################################
-
-                if not bed_files_exist("roadmap", assembly, windows_size):
-                    logger.info("Retrieving ROADMAP labels")
-                    enhancers, promoters = roadmap(
-                        # List of cell lines to be considered.
-                        cell_lines=cell_lines_roadmap,
-                        # Genomic assembly to retrieve.
-                        genome=assembly,
-                        # Window size to use for the various regions.
-                        window_size=windows_size,
-                    )
-                else:
-                    print("Loading ROADMAP labels")
-                    enhancers = pd.read_csv(get_bed_path(
-                        "roadmap", assembly, "enhancers", windows_size), sep="\t")
-                    promoters = pd.read_csv(get_bed_path(
-                        "roadmap", assembly, "promoters", windows_size), sep="\t")
-
-                run_pipeline(
-                    enhancers,
-                    root="roadmap",
-                    assembly=assembly,
-                    region="enhancers",
-                    windows_size=windows_size,
-                    cell_lines=cell_lines_roadmap
-                )
-                run_pipeline(
-                    promoters,
-                    root="roadmap",
-                    assembly=assembly,
-                    region="promoters",
-                    windows_size=windows_size,
-                    cell_lines=cell_lines_roadmap
-                )
-
-                r.add_report({
-                    "window_size": windows_size,
-                    "dataset": "roadmap"
-                })
