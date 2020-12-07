@@ -68,7 +68,7 @@ def build(
             "min": mine_min,
             "mean": mine_mean,
             "median": mine_median,
-            "variance": mine_variance,
+            "var": mine_variance,
         },
         cell_lines,
         assembly

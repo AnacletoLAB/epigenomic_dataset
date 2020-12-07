@@ -33,7 +33,7 @@ def compute_header(statistics: Dict[str, bool]) -> str:
 def get_callback(statistic: str):
     return {
         "mean": np.nanmean,
-        "var": np.nanmean,
+        "var": np.nanvar,
         "max": np.nanmax,
         "min": np.nanmin,
         "median": np.nanmedian
