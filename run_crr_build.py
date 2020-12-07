@@ -68,7 +68,12 @@ def run_pipeline(
             region=region
         ),
         extraction_workers=12,
-        concatenation_workers=20
+        concatenation_workers=20,
+        mine_max=True,
+        mine_min=True,
+        mine_mean=True,
+        mine_median=True,
+        mine_variance=True
     )
 
 

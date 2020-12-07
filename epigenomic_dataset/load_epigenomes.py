@@ -8,8 +8,8 @@ def load_epigenomes(
     cell_line: str = "K562",
     assembly: str = "hg38",
     dataset: str = "fantom",
-    regions: str = "promoters",
-    window_size: int = 200,
+    region: str = "promoters",
+    window_size: int = 256,
     root: str = "datasets",
     drop_unique_group_by: bool = True
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
@@ -27,9 +27,9 @@ def load_epigenomes(
         Dataset to consider. By default fantom.
         Currently available datasets are
         listed in the repository README file.
-    regions: str = "promoters",
-        Regions to consider. By default promoters.
-        Currently available regions are
+    region: str = "promoters",
+        Region to consider. By default promoters.
+        Currently available region are
         listed in the repository README file.
     window_size: int = 200,
         Window size to consider. By default 200.
@@ -48,19 +48,19 @@ def load_epigenomes(
     """
     repository = "https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed"
     get_parameter = "?raw=true"
-    data_path_placeholder = "{{root}}/{dataset}/{window_size}/{regions}/{cell_line}.csv.gz".format(
+    data_path_placeholder = "{{root}}/{dataset}/{assembly}/{window_size}/{region}/{cell_line}.csv.xz".format(
         root=root,
         dataset=dataset,
         window_size=window_size,
-        regions=regions,
+        region=region,
         cell_line=cell_line
     )
     data_path = data_path_placeholder.format(root=root)
-    label_path_placeholder = "{{root}}/{dataset}/{window_size}/{regions}.bed.gz".format(
+    label_path_placeholder = "{{root}}/{dataset}/{assembly}/{window_size}/{region}.bed.xz".format(
         root=root,
         dataset=dataset,
         window_size=window_size,
-        regions=regions
+        region=region
     )
     label_path = label_path_placeholder.format(root=root)
 

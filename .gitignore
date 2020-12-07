@@ -9,7 +9,7 @@ __pycache__
 **/__pycache__/*
 
 .notipy.json
-
+.notipy
 .single_run
 
 .coverage*
@@ -21,3 +21,5 @@ epigenomes
 *.egg-info
 datasets/*
 targets/*
+fantom
+fantom_data
