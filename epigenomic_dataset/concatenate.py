@@ -53,7 +53,7 @@ def concatenate(
                 continue
 
             pd.concat(list(tqdm(
-                p.imap(to_dict, path),
+                p.imap(to_dict, paths),
                 desc="Concatenating files",
                 total=len(paths),
                 leave=False
