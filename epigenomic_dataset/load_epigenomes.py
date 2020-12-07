@@ -51,6 +51,7 @@ def load_epigenomes(
     data_path_placeholder = "{{root}}/{dataset}/{assembly}/{window_size}/{region}/{cell_line}.csv.xz".format(
         root=root,
         dataset=dataset,
+        assembly=assembly,
         window_size=window_size,
         region=region,
         cell_line=cell_line
@@ -59,6 +60,7 @@ def load_epigenomes(
     label_path_placeholder = "{{root}}/{dataset}/{assembly}/{window_size}/{region}.bed.xz".format(
         root=root,
         dataset=dataset,
+        assembly=assembly,
         window_size=window_size,
         region=region
     )
