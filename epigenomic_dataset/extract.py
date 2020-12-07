@@ -167,7 +167,8 @@ def extract(
         cell_lines,
         assembly,
         epigenomes_path,
-        targets_path, clear_download
+        targets_path,
+        clear_download
     )
     # Set workers number
     if workers == -1:

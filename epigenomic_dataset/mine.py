@@ -40,7 +40,7 @@ def get_callback(statistic: str):
     }[statistic]
 
 
-def get_target_path(root: str, cell_line: str, assembly: str, target: str) -> str:
+def get_target_path(root: str, cell_line: str, assembly: str, assay_term_name: str, target: str) -> str:
     """Return path where the target epigenomic data are to be stored.
 
     Parameters
@@ -52,6 +52,8 @@ def get_target_path(root: str, cell_line: str, assembly: str, target: str) -> st
         Cell line to consider.
     assembly: str,
         The genomic assembly of the data to be retrieved.
+    assay_term_name: str,
+        Name of the experiment.
     target: str,
         The name of the genomic target.
 
@@ -59,11 +61,15 @@ def get_target_path(root: str, cell_line: str, assembly: str, target: str) -> st
     -----------------------
     The path where to store the epigenomic data.
     """
-    return "{root}/{assembly}/{cell_line}/{target}.csv.gz".format(
+    file_name = "{}.csv.xz".format(
+        assay_term_name if target == "Unknown" else target
+    )
+    return "{root}/{assembly}/{cell_line}/{assay_term_name}.csv.xz".format(
         root=root,
         cell_line=cell_line,
         assembly=assembly,
-        target=target
+        assay_term_name=assay_term_name,
+        target=file_name
     )
 
 
@@ -176,11 +182,11 @@ def mine(
                 load_accession_path(root, accession)
                 for accession in group.accession
             ],
-            "target": get_target_path(root, cell_line, assembly, target),
+            "target": get_target_path(root, cell_line, assembly, assay_term_name, target),
             "statistics": statistics
         }
-        for (cell_line, target), group in load_epigenomes_table(cell_lines, assembly).groupby(["cell_line", "target"])
-        if not os.path.exists(get_target_path(root, assembly, cell_line, target))
+        for (cell_line, assay_term_name, target), group in load_epigenomes_table(cell_lines, assembly).groupby(["cell_line", "assay_term_name", "target"])
+        if not os.path.exists(get_target_path(root, assembly, cell_line, assay_term_name, target))
     ]
 
     with Pool(cpu_count()) as p:

@@ -41,7 +41,7 @@ def concatenate(
     if workers == -1:
         workers = cpu_count()
     with Pool(min(cpu_count(), workers)) as p:
-        for cell_line, group in tqdm(table.groupby("cell_line"), leave=False, desc="Concatenating cell lines"):
+        for cell_line, group in tqdm(table.groupby(["cell_line", "assay_term_name"]), leave=False, desc="Concatenating cell lines"):
             path = "{root}/{assembly}/{cell_line}.csv.xz".format(
                 root=root,
                 assembly=assembly,
@@ -51,10 +51,10 @@ def concatenate(
                 continue
             paths = [
                 {
-                    "path": get_target_path(root, cell_line, assembly, target),
-                    "target": target
+                    "path": get_target_path(root, cell_line, assembly, assay_term_name, target),
+                    "feature": assay_term_name if target == "Unknown" else target,
                 }
-                for target in group.target.unique()
+                for assay_term_name, target in set(group[["assay_term_name", "target"]].values)
             ]
 
             pd.concat(list(tqdm(
