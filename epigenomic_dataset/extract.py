@@ -3,7 +3,8 @@ import os
 from typing import List
 from encodeproject import download
 from pybwtool import extract as extract_bigwig
-from tqdm.auto import tqdm
+from tqdm.auto import tqdm, trange
+from time import sleep
 from multiprocessing import Pool, cpu_count
 import warnings
 
@@ -17,7 +18,15 @@ def extraction_job(
 ):
     # Download file if it does not already exist
     if not os.path.exists(epigenome_path):
-        download(url, epigenome_path)
+        iteration = 0
+        while True:
+            iteration += 1
+            try:
+                download(url, epigenome_path)
+                break
+            except ValueError as e:
+                for _ in trange(iteration*1000, desc="Sleeping for a while"):
+                    sleep(1/100)
 
     # Extract the features
     extract_bigwig(
