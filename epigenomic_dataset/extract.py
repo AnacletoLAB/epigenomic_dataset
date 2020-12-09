@@ -25,7 +25,7 @@ def extraction_job(
                 download(url, epigenome_path)
                 break
             except ValueError as e:
-                for _ in trange(iteration*1000, desc="Sleeping for a while"):
+                for _ in trange((2**iteration)*1000, desc="Sleeping for a while"):
                     sleep(1/100)
 
     # Extract the features
