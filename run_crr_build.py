@@ -66,7 +66,7 @@ def run_pipeline(
             windows_size=windows_size,
             region=region
         ),
-        extraction_workers=12,
+        extraction_workers=1,
         concatenation_workers=20,
         mine_max=True,
         mine_min=True,
