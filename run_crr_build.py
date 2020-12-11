@@ -100,14 +100,14 @@ if __name__ == "__main__":
 
         if not bed_files_exist("fantom", assembly, windows_size):
             logger.info("Retrieving FANTOM labels")
-            enhancers, promoters = fantom(
+            enhancers, promoters = next(fantom(
                 # list of cell lines to be considered.
                 cell_lines=cell_lines_fantom,
                 # Genomic assembly to retrieve.
                 genome=assembly,
                 # window size to use for the various regions.
                 window_sizes=[windows_size],
-            )
+            ))
             for path in (enhancers_path, promoters_path):
                 os.makedirs(os.path.dirname(path), exist_ok=True)
 
