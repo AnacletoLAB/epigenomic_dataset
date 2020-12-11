@@ -106,9 +106,7 @@ if __name__ == "__main__":
                 # Genomic assembly to retrieve.
                 genome=assembly,
                 # window size to use for the various regions.
-                window_size=windows_size,
-                # whetever to drop the rows where no activation is detected for every rows.
-                drop_always_inactive_rows=False
+                window_sizes=[windows_size],
             )
             for path in (enhancers_path, promoters_path):
                 os.makedirs(os.path.dirname(path), exist_ok=True)
