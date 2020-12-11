@@ -7,7 +7,7 @@ from tqdm.auto import tqdm
 
 
 def get_bed_path(root: str, assembly: str, region: str, window_size: int) -> str:
-    return "{root}/{assembly}/{window_size}/{region}.bed".format(
+    return "{root}/{assembly}/{window_size}/{region}.bed.xz".format(
         root=root,
         assembly=assembly,
         window_size=window_size,
