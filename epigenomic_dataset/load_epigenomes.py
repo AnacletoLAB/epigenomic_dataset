@@ -1,6 +1,6 @@
 from typing import Tuple
 import os
-from encodeproject.utils import download
+from downloaders import BaseDownloader
 import pandas as pd
 
 
@@ -9,9 +9,10 @@ def load_epigenomes(
     assembly: str = "hg38",
     dataset: str = "fantom",
     region: str = "promoters",
+    metric: str = "mean",
     window_size: int = 256,
     root: str = "datasets",
-    drop_unique_group_by: bool = True
+    verbose: int = 2
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Return epigenomic data and labels for given parameters.
 
@@ -31,16 +32,16 @@ def load_epigenomes(
         Region to consider. By default promoters.
         Currently available region are
         listed in the repository README file.
+    metric: str = "mean",
+        The metric to load.
     window_size: int = 200,
         Window size to consider. By default 200.
         Currently available window sizes are
         listed in the repository README file.
     root: str = "datasets"
         Where to store the downloaded data.
-    drop_unique_group_by: bool = True,
-        Whetever to drop the group by column layer
-        when it is unique, eg when only a max group by
-        is available in the dataset.
+    verbose: int = 2,
+        Verbosity level.
 
     Returns
     ----------------------------------------
@@ -66,16 +67,16 @@ def load_epigenomes(
     )
     label_path = label_path_placeholder.format(root=root)
 
-    if not os.path.exists(data_path):
-        download(
-            url=data_path_placeholder.format(root=repository)+get_parameter,
-            path=data_path
-        )
-    if not os.path.exists(label_path):
-        download(
-            url=label_path_placeholder.format(root=repository)+get_parameter,
-            path=label_path
-        )
+    downloader = BaseDownloader(target_directory=root, verbose=verbose)
+
+    downloader.download(
+        urls=data_path_placeholder.format(root=repository)+get_parameter,
+        paths=data_path
+    )
+    downloader.download(
+        urls=label_path_placeholder.format(root=repository)+get_parameter,
+        paths=label_path
+    )
 
     dtypes = {
         "chrom": "str",
@@ -97,10 +98,11 @@ def load_epigenomes(
         inplace=True
     )
 
-    X.columns.names = (None,)*len(X.columns.names)
-
-    if X.columns.levels[1].size == 1 and drop_unique_group_by:
-        X = X.droplevel(1, axis=1)
+    X = X[[
+        col
+        for col in X.columns
+        if metric in col
+    ]]
 
     y = pd.read_csv(
         label_path,

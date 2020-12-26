@@ -61,6 +61,7 @@ setup(
     # Add here the package dependencies
     install_requires=[
         "encodeproject>=1.0.19",
+        "downloaders",
         "pybwtool>=1.0.8",
         "crr_labels>=1.1.0",
         "notipy_me>=1.3.23"
