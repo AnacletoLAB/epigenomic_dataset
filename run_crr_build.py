@@ -69,10 +69,10 @@ def run_pipeline(
         extraction_workers=20,
         concatenation_workers=20,
         mine_max=True,
-        mine_min=True,
+        mine_min=False,
         mine_mean=True,
         mine_median=True,
-        mine_variance=True
+        mine_variance=False
     )
 
 
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     cell_lines_encode = cell_lines + ["MCF-7"]
     cell_lines_fantom = cell_lines + ["MCF7"]
     cell_lines_roadmap = ["A549", "GM12878", "H1", "HepG2", "K562"]
-    windows_sizes = (1024, 512, 256, 128, 64)
+    windows_sizes = (256,)  # (1024, 512, 256, 128, 64)
     assembly = "hg38"
     # We are not computing RoadMap right now
     # because we are still choosing the states from the model to be used.
@@ -90,9 +90,9 @@ if __name__ == "__main__":
     for windows_size in tqdm(windows_sizes, desc="Parsing window sizes"):
 
         enhancers_path = get_bed_path("fantom", assembly,
-                                        "enhancers", windows_size)
+                                      "enhancers", windows_size)
         promoters_path = get_bed_path("fantom", assembly,
-                                        "promoters", windows_size)
+                                      "promoters", windows_size)
 
         ####################################################
         # HERE WE BUILD FANTOM                             #
