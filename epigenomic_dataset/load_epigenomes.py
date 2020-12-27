@@ -110,10 +110,21 @@ def load_epigenomes(
         label_path,
         index_col=[0, 1, 2, 3],
         sep="\t",
+        low_memory=False,
         dtype=dtypes
     ).astype(int)
 
-    y = y[[cell_line.replace("-", "").upper()]]
+    normalized_cell_line = cell_line.replace("-", "").upper()
+
+    if normalized_cell_line not in y.columns:
+        raise ValueError(
+            (
+                "The requested cell line {} is not present in the labels. "
+                "The available cell lines are {}"
+            ).format(normalized_cell_line, ", ".join(y.columns))
+        )
+
+    y = y[[normalized_cell_line]]
 
     return X, y
 
