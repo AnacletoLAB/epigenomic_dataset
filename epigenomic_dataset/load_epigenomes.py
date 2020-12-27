@@ -202,14 +202,14 @@ def load_task(
         promoters_epi = promoters_epi[promoters_labels.to_numpy() == 1]
         enhancers_epi = enhancers_epi[enhancers_labels.to_numpy() == 1]
         promoters_labels = promoters_labels[promoters_labels.to_numpy() == 1]
-        enhancers_labels = enhancers_labels[promoters_labels.to_numpy() == 1]
+        enhancers_labels = enhancers_labels[enhancers_labels.to_numpy() == 1]
         enhancers_labels[enhancers_labels.columns[0]] = 0
     elif only_inactive:
         promoters_epi = promoters_epi[promoters_labels.to_numpy() == 0]
         enhancers_epi = enhancers_epi[enhancers_labels.to_numpy() == 0]
         promoters_labels = promoters_labels[promoters_labels.to_numpy() == 0]
         promoters_labels[promoters_labels.columns[0]] = 1
-        enhancers_labels = enhancers_labels[promoters_labels.to_numpy() == 0]
+        enhancers_labels = enhancers_labels[enhancers_labels.to_numpy() == 0]
 
     if only_active or only_inactive:
         epigenomic_data = pd.concat([
