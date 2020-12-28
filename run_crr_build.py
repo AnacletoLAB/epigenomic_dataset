@@ -81,7 +81,7 @@ if __name__ == "__main__":
     cell_lines_encode = cell_lines + ["MCF-7"]
     cell_lines_fantom = cell_lines + ["MCF7"]
     cell_lines_roadmap = ["A549", "GM12878", "H1", "HepG2", "K562"]
-    windows_sizes = (256,)  # (1024, 512, 256, 128, 64)
+    windows_sizes = (1024, 512, 256, 128, 64)
     assembly = "hg38"
     # We are not computing RoadMap right now
     # because we are still choosing the states from the model to be used.
