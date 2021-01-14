@@ -1,5 +1,6 @@
 from typing import Tuple
 import pandas as pd
+from tqdm.auto import tqdm
 from .load_epigenomes import load_epigenomes
 
 
@@ -393,6 +394,7 @@ def load_all_tasks(
     window_size: int = 256,
     root: str = "datasets",
     verbose: int = 2,
+    leave: bool = False
 ):
     """Return generator with all the tasks.
 
@@ -418,6 +420,8 @@ def load_all_tasks(
         Where to store the downloaded data.
     verbose: int = 2,
         Verbosity level.
+    leave: bool = False,
+        Wether to leave the loading bar.
 
     Returns
     ----------------------------------------
@@ -436,11 +440,16 @@ def load_all_tasks(
             ),
             task.__name__
         )
-        for task in (
-            active_enhancers_vs_inactive_enhancers,
-            active_promoters_vs_inactive_promoters,
-            active_enhancers_vs_active_promoters,
-            inactive_enhancers_vs_inactive_promoters,
-            active_vs_inactive
+        for task in tqdm(
+            (
+                active_enhancers_vs_inactive_enhancers,
+                active_promoters_vs_inactive_promoters,
+                active_enhancers_vs_active_promoters,
+                inactive_enhancers_vs_inactive_promoters,
+                active_vs_inactive
+            ),
+            desc="Executing CRR prediction tasks",
+            disable=verbose==0,
+            leave=leave
         )
     )
