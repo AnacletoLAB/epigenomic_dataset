@@ -2,7 +2,7 @@
 from typing import Tuple
 import numpy as np
 from sklearn.impute import KNNImputer
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
 def normalize_epigenomic_data(
@@ -27,7 +27,7 @@ def normalize_epigenomic_data(
     """
     # Create the imputer and scaler object
     imputer = KNNImputer()
-    scaler = StandardScaler()
+    scaler = MinMaxScaler()
     # Fit the imputer object
     imputer.fit(train_x)
     # Impute the train and test data
