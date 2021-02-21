@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 def normalize_epigenomic_data(
     train_x: np.ndarray,
-    test_x: np.ndarray
+    test_x: np.ndarray = None
 ) -> Tuple[np.ndarray]:
     """Return imputed and normalized epigenomic data.
 
@@ -18,7 +18,7 @@ def normalize_epigenomic_data(
     -------------------------
     train_x: np.ndarray,
         Training data to use to fit the imputer and scaled.
-    test_x: np.ndarray,
+    test_x: np.ndarray = None,
         Test data to be normalized.
 
     Returns
@@ -32,11 +32,15 @@ def normalize_epigenomic_data(
     imputer.fit(train_x)
     # Impute the train and test data
     imputed_train_x = imputer.transform(train_x)
-    imputed_test_x = imputer.transform(test_x)
+    if test_x is not None:
+        imputed_test_x = imputer.transform(test_x)
     # Fit the scaler object
     scaler.fit(imputed_train_x)
     # Scale the train and test data
     scaled_train_x = scaler.transform(imputed_train_x)
-    scaled_test_x = scaler.transform(imputed_test_x)
-    # Return the normalized data
-    return scaled_train_x, scaled_test_x
+    if test_x is not None:
+        scaled_test_x = scaler.transform(imputed_test_x)
+    if test_x is not None:
+        # Return the normalized data
+        return scaled_train_x, scaled_test_x
+    return scaled_train_x
