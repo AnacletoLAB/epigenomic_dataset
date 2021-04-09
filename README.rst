@@ -136,8 +136,8 @@ You can automatically retrieve the data as follows:
     X, y = load_epigenomes(
         cell_line = "K562",
         dataset = "fantom",
-        regions = "promoters",
-        window_size = 200,
+        region = "promoters",
+        window_size = 256,
         root = "datasets" # Path where to download data
     )
 
