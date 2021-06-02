@@ -1,4 +1,5 @@
-from typing import Tuple
+"""Module providing straightforward methods to load the tasks."""
+from typing import Tuple, Dict
 import pandas as pd
 from tqdm.auto import tqdm
 from .load_epigenomes import load_epigenomes
@@ -15,7 +16,10 @@ def load_task(
     only_active: bool = False,
     only_inactive: bool = False,
     load_promoters: bool = False,
-    load_enhancers: bool = False
+    load_enhancers: bool = False,
+    binarize: bool = False,
+    min_active_tpm_value: float = 1,
+    max_inactive_tpm_value: float = 1,
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Return epigenomic data and labels for given parameters.
 
@@ -33,8 +37,8 @@ def load_task(
         listed in the repository README file.
     metric: str = "mean",
         The metric to load.
-    window_size: int = 200,
-        Window size to consider. By default 200.
+    window_size: int = 256,
+        Window size to consider. By default 256.
         Currently available window sizes are
         listed in the repository README file.
     root: str = "datasets"
@@ -49,6 +53,13 @@ def load_task(
         Wether to load promoters.
     load_enhancers: bool = False
         Wether to load enhancers.
+    binarize: bool = False,
+        Whether to binarize the TPM values.
+    min_active_tpm_value: float = 1,
+        Minimum TPM value.
+    max_inactive_tpm_value: float = 1,
+        Maximum TPM value.
+        Values between the minimum and maximum will be dropped.
 
     Returns
     ----------------------------------------
@@ -77,6 +88,9 @@ def load_task(
             metric=metric,
             window_size=window_size,
             root=root,
+            binarize=binarize,
+            min_active_tpm_value=min_active_tpm_value,
+            max_inactive_tpm_value=max_inactive_tpm_value,
             verbose=verbose
         ) if enabled else (None, None)
         for region, enabled in (
@@ -128,6 +142,9 @@ def active_promoters_vs_inactive_promoters(
     metric: str = "mean",
     window_size: int = 256,
     root: str = "datasets",
+    binarize: bool = False,
+    min_active_tpm_value: float = 1,
+    max_inactive_tpm_value: float = 1,
     verbose: int = 2,
 ):
     """Return epigenomic data and labels for given parameters.
@@ -146,12 +163,19 @@ def active_promoters_vs_inactive_promoters(
         listed in the repository README file.
     metric: str = "mean",
         The metric to load.
-    window_size: int = 200,
-        Window size to consider. By default 200.
+    window_size: int = 256,
+        Window size to consider. By default 256.
         Currently available window sizes are
         listed in the repository README file.
     root: str = "datasets"
         Where to store the downloaded data.
+    binarize: bool = False,
+        Whether to binarize the TPM values.
+    min_active_tpm_value: float = 1,
+        Minimum TPM value.
+    max_inactive_tpm_value: float = 1,
+        Maximum TPM value.
+        Values between the minimum and maximum will be dropped.
     verbose: int = 2,
         Verbosity level.
 
@@ -171,6 +195,9 @@ def active_promoters_vs_inactive_promoters(
         only_inactive=False,
         load_enhancers=False,
         load_promoters=True,
+        binarize=binarize,
+        min_active_tpm_value=min_active_tpm_value,
+        max_inactive_tpm_value=max_inactive_tpm_value,
     )
 
 
@@ -181,6 +208,9 @@ def active_enhancers_vs_inactive_enhancers(
     metric: str = "mean",
     window_size: int = 256,
     root: str = "datasets",
+    binarize: bool = False,
+    min_active_tpm_value: float = 1,
+    max_inactive_tpm_value: float = 1,
     verbose: int = 2,
 ):
     """Return epigenomic data and labels for given parameters.
@@ -199,12 +229,19 @@ def active_enhancers_vs_inactive_enhancers(
         listed in the repository README file.
     metric: str = "mean",
         The metric to load.
-    window_size: int = 200,
-        Window size to consider. By default 200.
+    window_size: int = 256,
+        Window size to consider. By default 256.
         Currently available window sizes are
         listed in the repository README file.
     root: str = "datasets"
         Where to store the downloaded data.
+    binarize: bool = False,
+        Whether to binarize the TPM values.
+    min_active_tpm_value: float = 1,
+        Minimum TPM value.
+    max_inactive_tpm_value: float = 1,
+        Maximum TPM value.
+        Values between the minimum and maximum will be dropped.
     verbose: int = 2,
         Verbosity level.
 
@@ -224,59 +261,9 @@ def active_enhancers_vs_inactive_enhancers(
         only_inactive=False,
         load_enhancers=True,
         load_promoters=False,
-    )
-
-
-def active_vs_inactive(
-    cell_line: str = "K562",
-    assembly: str = "hg38",
-    dataset: str = "fantom",
-    metric: str = "mean",
-    window_size: int = 256,
-    root: str = "datasets",
-    verbose: int = 2,
-):
-    """Return epigenomic data and labels for given parameters.
-
-    Parameters
-    ----------------------------------------
-    cell_line: str = "K562",
-        Cell line to consider. By default K562.
-        Currently available cell lines are
-        listed in the repository README file.
-    assembly: str,
-        The genomic assembly of the data to be retrieved.
-    dataset: str = "fantom",
-        Dataset to consider. By default fantom.
-        Currently available datasets are
-        listed in the repository README file.
-    metric: str = "mean",
-        The metric to load.
-    window_size: int = 200,
-        Window size to consider. By default 200.
-        Currently available window sizes are
-        listed in the repository README file.
-    root: str = "datasets"
-        Where to store the downloaded data.
-    verbose: int = 2,
-        Verbosity level.
-
-    Returns
-    ----------------------------------------
-    Return tuple with input and output DataFrames.
-    """
-    return load_task(
-        cell_line=cell_line,
-        assembly=assembly,
-        dataset=dataset,
-        metric=metric,
-        window_size=window_size,
-        root=root,
-        verbose=verbose,
-        only_active=False,
-        only_inactive=False,
-        load_enhancers=True,
-        load_promoters=True,
+        binarize=binarize,
+        min_active_tpm_value=min_active_tpm_value,
+        max_inactive_tpm_value=max_inactive_tpm_value,
     )
 
 
@@ -288,6 +275,7 @@ def active_enhancers_vs_active_promoters(
     window_size: int = 256,
     root: str = "datasets",
     verbose: int = 2,
+    **kwargs: Dict
 ):
     """Return epigenomic data and labels for given parameters.
 
@@ -305,8 +293,8 @@ def active_enhancers_vs_active_promoters(
         listed in the repository README file.
     metric: str = "mean",
         The metric to load.
-    window_size: int = 200,
-        Window size to consider. By default 200.
+    window_size: int = 256,
+        Window size to consider. By default 256.
         Currently available window sizes are
         listed in the repository README file.
     root: str = "datasets"
@@ -341,6 +329,7 @@ def inactive_enhancers_vs_inactive_promoters(
     window_size: int = 256,
     root: str = "datasets",
     verbose: int = 2,
+    **kwargs: Dict
 ):
     """Return epigenomic data and labels for given parameters.
 
@@ -358,8 +347,8 @@ def inactive_enhancers_vs_inactive_promoters(
         listed in the repository README file.
     metric: str = "mean",
         The metric to load.
-    window_size: int = 200,
-        Window size to consider. By default 200.
+    window_size: int = 256,
+        Window size to consider. By default 256.
         Currently available window sizes are
         listed in the repository README file.
     root: str = "datasets"
@@ -394,7 +383,10 @@ def load_all_tasks(
     window_size: int = 256,
     root: str = "datasets",
     verbose: int = 2,
-    leave: bool = False
+    leave: bool = False,
+    binarize: bool = False,
+    min_active_tpm_value: float = 1,
+    max_inactive_tpm_value: float = 1,
 ):
     """Return generator with all the tasks.
 
@@ -412,8 +404,8 @@ def load_all_tasks(
         listed in the repository README file.
     metric: str = "mean",
         The metric to load.
-    window_size: int = 200,
-        Window size to consider. By default 200.
+    window_size: int = 256,
+        Window size to consider. By default 256.
         Currently available window sizes are
         listed in the repository README file.
     root: str = "datasets"
@@ -422,6 +414,13 @@ def load_all_tasks(
         Verbosity level.
     leave: bool = False,
         Wether to leave the loading bar.
+    binarize: bool = False,
+        Whether to binarize the TPM values.
+    min_active_tpm_value: float = 1,
+        Minimum TPM value.
+    max_inactive_tpm_value: float = 1,
+        Maximum TPM value.
+        Values between the minimum and maximum will be dropped.
 
     Returns
     ----------------------------------------
@@ -437,6 +436,9 @@ def load_all_tasks(
                 window_size=window_size,
                 root=root,
                 verbose=verbose,
+                binarize=binarize,
+                min_active_tpm_value=min_active_tpm_value,
+                max_inactive_tpm_value=max_inactive_tpm_value,
             ),
             task.__name__
         )
@@ -446,10 +448,9 @@ def load_all_tasks(
                 active_promoters_vs_inactive_promoters,
                 active_enhancers_vs_active_promoters,
                 inactive_enhancers_vs_inactive_promoters,
-                active_vs_inactive
             ),
             desc="Executing CRR prediction tasks",
-            disable=verbose==0,
+            disable=verbose == 0,
             leave=leave
         )
     )
