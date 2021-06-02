@@ -6,7 +6,6 @@ from .load_tasks import (
     active_enhancers_vs_inactive_enhancers,
     inactive_enhancers_vs_inactive_promoters,
     active_promoters_vs_inactive_promoters,
-    active_vs_inactive,
     load_all_tasks
 )
 from .logging import logger
@@ -17,6 +16,5 @@ __all__ = [
     "active_enhancers_vs_inactive_enhancers",
     "inactive_enhancers_vs_inactive_promoters",
     "active_promoters_vs_inactive_promoters",
-    "active_vs_inactive",
     "load_all_tasks"
 ]
