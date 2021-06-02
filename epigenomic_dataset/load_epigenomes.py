@@ -12,6 +12,9 @@ def load_epigenomes(
     metric: str = "mean",
     window_size: int = 256,
     root: str = "datasets",
+    binarize: bool = False,
+    min_active_tpm_value: float = 1,
+    max_inactive_tpm_value: float = 1,
     verbose: int = 2
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Return epigenomic data and labels for given parameters.
@@ -40,6 +43,13 @@ def load_epigenomes(
         listed in the repository README file.
     root: str = "datasets"
         Where to store the downloaded data.
+    binarize: bool = False,
+        Whether to binarize the TPM values.
+    min_active_tpm_value: float = 1,
+        Minimum TPM value.
+    max_inactive_tpm_value: float = 1,
+        Maximum TPM value.
+        Values between the minimum and maximum will be dropped.
     verbose: int = 2,
         Verbosity level.
 
@@ -47,6 +57,13 @@ def load_epigenomes(
     ----------------------------------------
     Return tuple with input and output DataFrames.
     """
+
+    if max_inactive_tpm_value > min_active_tpm_value:
+        raise ValueError(
+            "The maximum inactive TPM value is higher ",
+            "than the given minimum active TPM value."
+        )
+
     repository = "https://github.com/LucaCappelletti94/epigenomic_dataset/blob/master/preprocessed"
     get_parameter = "?raw=true"
     data_path_placeholder = "{{root}}/{dataset}/{assembly}/{window_size}/{region}/{cell_line}.csv.xz".format(
@@ -112,7 +129,20 @@ def load_epigenomes(
         sep="\t",
         low_memory=False,
         dtype=dtypes
-    ).astype(int)
+    )
+
+    # Making sure the two datasets indices are aligned
+    y = y.loc[X.index]
+
+    # If the minimum and maximum values are not equal,
+    # we need to drop the unknown values
+    if min_active_tpm_value != max_inactive_tpm_value:
+        gray_zone_values = (y > min_active_tpm_value) & (y < max_inactive_tpm_value)
+        y = y[~gray_zone_values]
+        X = X[~gray_zone_values]
+    
+    if binarize:
+        y = y > min_active_tpm_value
 
     normalized_cell_line = cell_line.replace("-", "").upper()
 
