@@ -79,6 +79,12 @@ def load_task(
             "you must load both enhancers and promoters."
         )
 
+    if (only_active or only_active) and min_active_tpm_value != max_inactive_tpm_value:
+        raise ValueError(
+            "It does not make sense to threshold different cis-regulatory "
+            "regions TPMs."
+        )
+
     (promoters_epi, promoters_labels), (enhancers_epi, enhancers_labels) = [
         load_epigenomes(
             cell_line=cell_line,
