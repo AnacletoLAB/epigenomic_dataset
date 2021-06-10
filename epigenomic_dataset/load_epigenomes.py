@@ -134,6 +134,20 @@ def load_epigenomes(
     # Making sure the two datasets indices are aligned
     y = y.loc[X.index]
 
+    # Normalize the cell lines
+    normalized_cell_line = cell_line.replace("-", "").upper()
+
+    if normalized_cell_line not in y.columns:
+        raise ValueError(
+            (
+                "The requested cell line {} is not present in the labels. "
+                "The available cell lines are {}"
+            ).format(normalized_cell_line, ", ".join(y.columns))
+        )
+
+    # Query for the requested cell line
+    y = y[[normalized_cell_line]]
+
     # If the minimum and maximum values are not equal,
     # we need to drop the unknown values
     if min_active_tpm_value != max_inactive_tpm_value:
@@ -145,17 +159,5 @@ def load_epigenomes(
     
     if binarize:
         y = y > min_active_tpm_value
-
-    normalized_cell_line = cell_line.replace("-", "").upper()
-
-    if normalized_cell_line not in y.columns:
-        raise ValueError(
-            (
-                "The requested cell line {} is not present in the labels. "
-                "The available cell lines are {}"
-            ).format(normalized_cell_line, ", ".join(y.columns))
-        )
-
-    y = y[[normalized_cell_line]]
 
     return X, y

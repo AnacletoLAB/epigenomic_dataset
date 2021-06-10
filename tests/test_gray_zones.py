@@ -16,6 +16,15 @@ def test_gray_zones():
     assert X.shape[0] == y.shape[0]
     assert all(X.index == y.index)
     assert set(y.values.flatten()) == set([0.0, 1.0])
+    X, y = active_enhancers_vs_inactive_enhancers(
+        binarize=True,
+        min_active_tpm_value=1,
+        max_inactive_tpm_value=0
+    )
+    assert X.shape[0] > 0
+    assert X.shape[0] == y.shape[0]
+    assert all(X.index == y.index)
+    assert set(y.values.flatten()) == set([0.0, 1.0])
 
     X, y = active_promoters_vs_inactive_promoters()
     assert X.shape[0] > 0
@@ -23,6 +32,15 @@ def test_gray_zones():
     assert all(X.index == y.index)
     assert set(y.values.flatten()) != set([0.0, 1.0])
     X, y = active_promoters_vs_inactive_promoters(binarize=True)
+    assert X.shape[0] > 0
+    assert X.shape[0] == y.shape[0]
+    assert all(X.index == y.index)
+    assert set(y.values.flatten()) == set([0.0, 1.0])
+    X, y = active_promoters_vs_inactive_promoters(
+        binarize=True,
+        min_active_tpm_value=1,
+        max_inactive_tpm_value=0
+    )
     assert X.shape[0] > 0
     assert X.shape[0] == y.shape[0]
     assert all(X.index == y.index)
