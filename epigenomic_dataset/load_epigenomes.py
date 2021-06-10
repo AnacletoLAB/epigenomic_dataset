@@ -137,7 +137,9 @@ def load_epigenomes(
     # If the minimum and maximum values are not equal,
     # we need to drop the unknown values
     if min_active_tpm_value != max_inactive_tpm_value:
-        gray_zone_values = (y > max_inactive_tpm_value) & (y < min_active_tpm_value)
+        gray_zone_values = (
+            (y > max_inactive_tpm_value) & (y < min_active_tpm_value)
+        ).values.flatten()
         y = y[~gray_zone_values]
         X = X[~gray_zone_values]
     
