@@ -280,7 +280,6 @@ def active_enhancers_vs_active_promoters(
     metric: str = "mean",
     window_size: int = 256,
     root: str = "datasets",
-    binarize: bool = False,
     min_active_tpm_value: float = 1,
     max_inactive_tpm_value: float = 1,
     verbose: int = 2
@@ -333,7 +332,7 @@ def active_enhancers_vs_active_promoters(
         only_inactive=False,
         load_enhancers=True,
         load_promoters=True,
-        binarize=binarize,
+        binarize=True,
         min_active_tpm_value=min_active_tpm_value,
         max_inactive_tpm_value=max_inactive_tpm_value,
     )
@@ -346,7 +345,6 @@ def inactive_enhancers_vs_inactive_promoters(
     metric: str = "mean",
     window_size: int = 256,
     root: str = "datasets",
-    binarize: bool = False,
     min_active_tpm_value: float = 1,
     max_inactive_tpm_value: float = 1,
     verbose: int = 2
@@ -399,7 +397,7 @@ def inactive_enhancers_vs_inactive_promoters(
         only_inactive=True,
         load_enhancers=True,
         load_promoters=True,
-        binarize=binarize,
+        binarize=True,
         min_active_tpm_value=min_active_tpm_value,
         max_inactive_tpm_value=max_inactive_tpm_value,
     )
