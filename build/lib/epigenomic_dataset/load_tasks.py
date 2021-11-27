@@ -280,10 +280,8 @@ def active_enhancers_vs_active_promoters(
     metric: str = "mean",
     window_size: int = 256,
     root: str = "datasets",
-    binarize: bool = False,
-    min_active_tpm_value: float = 1,
-    max_inactive_tpm_value: float = 1,
-    verbose: int = 2
+    verbose: int = 2,
+    **kwargs: Dict
 ):
     """Return epigenomic data and labels for given parameters.
 
@@ -307,13 +305,6 @@ def active_enhancers_vs_active_promoters(
         listed in the repository README file.
     root: str = "datasets"
         Where to store the downloaded data.
-        min_active_tpm_value: float = 1,
-        Minimum TPM value.
-    binarize: bool = False,
-        Whether to binarize the TPM values.
-    max_inactive_tpm_value: float = 1,
-        Maximum TPM value.
-        Values between the minimum and maximum will be dropped.
     verbose: int = 2,
         Verbosity level.
 
@@ -333,9 +324,6 @@ def active_enhancers_vs_active_promoters(
         only_inactive=False,
         load_enhancers=True,
         load_promoters=True,
-        binarize=binarize,
-        min_active_tpm_value=min_active_tpm_value,
-        max_inactive_tpm_value=max_inactive_tpm_value,
     )
 
 
@@ -346,10 +334,8 @@ def inactive_enhancers_vs_inactive_promoters(
     metric: str = "mean",
     window_size: int = 256,
     root: str = "datasets",
-    binarize: bool = False,
-    min_active_tpm_value: float = 1,
-    max_inactive_tpm_value: float = 1,
-    verbose: int = 2
+    verbose: int = 2,
+    **kwargs: Dict
 ):
     """Return epigenomic data and labels for given parameters.
 
@@ -373,13 +359,6 @@ def inactive_enhancers_vs_inactive_promoters(
         listed in the repository README file.
     root: str = "datasets"
         Where to store the downloaded data.
-    binarize: bool = False,
-        Whether to binarize the TPM values.
-    min_active_tpm_value: float = 1,
-        Minimum TPM value.
-    max_inactive_tpm_value: float = 1,
-        Maximum TPM value.
-        Values between the minimum and maximum will be dropped.
     verbose: int = 2,
         Verbosity level.
 
@@ -399,9 +378,6 @@ def inactive_enhancers_vs_inactive_promoters(
         only_inactive=True,
         load_enhancers=True,
         load_promoters=True,
-        binarize=binarize,
-        min_active_tpm_value=min_active_tpm_value,
-        max_inactive_tpm_value=max_inactive_tpm_value,
     )
 
 
