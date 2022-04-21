@@ -5,7 +5,6 @@ from typing import Dict, List
 from tqdm.auto import tqdm
 import numpy as np
 import pandas as pd
-from tabulate import tabulate
 import csv
 import gzip
 import warnings
